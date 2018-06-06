@@ -12,25 +12,24 @@
     "fmt": "prettier --write 'src/**/*.js'",
     "dev": "webpack --mode development --watch",
     "prod": "webpack --mode production",
-    "clean": "rimraf dist bundle"
+    "clean": "git clean -fdx"
   },
   "dependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
     "react-redux": "^5.0.7",
-    "redux": "^3.7.2",
-    "styled-components": "^3.2.1"
+    "redux": "^4.0.0",
+    "styled-components": "^3.3.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.40",
-    "@babel/preset-env": "^7.0.0-beta.40",
-    "@babel/preset-react": "^7.0.0-beta.40",
-    "babel-loader": "^8.0.0-beta.2",
-    "electron": "^1.8.3",
-    "prettier": "^1.11.1",
-    "rimraf": "^2.6.2",
-    "webpack": "^4.1.0",
-    "webpack-cli": "^2.0.10"
+    "@babel/core": "^7.0.0-beta.49",
+    "@babel/preset-env": "^7.0.0-beta.49",
+    "@babel/preset-react": "^7.0.0-beta.49",
+    "babel-loader": "^8.0.0-beta.3",
+    "electron": "^2.0.2",
+    "prettier": "^1.13.4",
+    "webpack": "^4.11.1",
+    "webpack-cli": "^3.0.2"
   },
   "babel": {
     "presets": [

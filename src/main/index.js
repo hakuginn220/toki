@@ -2,6 +2,10 @@ import path from 'path'
 import url from 'url'
 import { app, BrowserWindow } from 'electron'
 
+global.eval = () => {
+  throw new Error(`Sorry, this app does not support global.eval().`)
+}
+
 let mainWindow = null
 
 const createWindow = () => {
@@ -9,7 +13,8 @@ const createWindow = () => {
     width: 800,
     height: 600,
     minWidth: 800,
-    minHeight: 600
+    minHeight: 600,
+    nodeIntegration: false
   })
 
   mainWindow.loadURL(

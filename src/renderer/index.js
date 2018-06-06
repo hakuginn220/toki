@@ -6,6 +6,10 @@ import { injectGlobal } from 'styled-components'
 import store from './store'
 import App from './components/pages/app'
 
+window.eval = () => {
+  throw new Error(`Sorry, this app does not support window.eval().`)
+}
+
 webFrame.setVisualZoomLevelLimits(1, 1)
 
 injectGlobal`
