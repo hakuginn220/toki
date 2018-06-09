@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { compose, lifecycle } from 'recompose'
 import * as actions from '../actions'
 import Timeline from '../components/organisms/timeline'
 
@@ -19,11 +20,12 @@ function createDummyTweet() {
   }
 }
 
-export default connect(
-  state => state,
-  dispatch => bindActionCreators(actions, dispatch)
-)(
-  class extends Component {
+export default compose(
+  connect(
+    state => state.timeline,
+    dispatch => bindActionCreators(actions, dispatch)
+  ),
+  lifecycle({
     componentWillMount() {
       const { addTweet } = this.props
 
@@ -31,11 +33,5 @@ export default connect(
         addTweet(createDummyTweet())
       }, 2000)
     }
-
-    render() {
-      const { timeline } = this.props
-
-      return <Timeline {...timeline} />
-    }
-  }
-)
+  })
+)(Timeline)

@@ -1,5 +1,7 @@
 const path = require('path')
 
+const isDevelopment = process.argv.some(value => value === 'development')
+
 const option = {
   output: {
     filename: '[name].js',
@@ -14,6 +16,10 @@ const option = {
       }
     ]
   }
+}
+
+if (isDevelopment) {
+  option.devtool = 'source-map'
 }
 
 module.exports = [

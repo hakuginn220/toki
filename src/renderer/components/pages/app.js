@@ -4,23 +4,19 @@ import Navigation from '../../containers/navigation'
 import Textarea from '../../containers/textarea'
 import Timeline from '../../containers/timeline'
 
-export default class App extends Component {
-  render() {
-    return (
-      <Wrapper>
-        <WrapperNavigation>
-          <Navigation />
-        </WrapperNavigation>
-        <WrapperTextarea>
-          <Textarea />
-        </WrapperTextarea>
-        <WrapperTimeline>
-          <Timeline />
-        </WrapperTimeline>
-      </Wrapper>
-    )
-  }
-}
+export default () => (
+  <Wrapper>
+    <WrapperNavigation>
+      <Navigation />
+    </WrapperNavigation>
+    <WrapperTextarea>
+      <Textarea />
+    </WrapperTextarea>
+    <WrapperTimeline>
+      <Timeline />
+    </WrapperTimeline>
+  </Wrapper>
+)
 
 const Wrapper = styled.div`
   position: absolute;

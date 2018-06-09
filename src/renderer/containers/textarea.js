@@ -1,18 +1,20 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { compose, withHandlers } from 'recompose'
 import * as actions from '../actions'
 import Textarea from '../components/organisms/textarea'
 
-export default connect(
-  state => state,
-  dispatch => bindActionCreators(actions, dispatch)
-)(
-  class extends Component {
-    handleSubmit(e) {
-      const { writeTweet, writeTweetFail, writeTweetSuccess } = this.props
+export default compose(
+  connect(
+    state => state.textarea,
+    dispatch => bindActionCreators(actions, dispatch)
+  ),
+  withHandlers({
+    onSubmit: props => event => {
+      const { writeTweet, writeTweetFail, writeTweetSuccess } = props
 
-      writeTweet(e.target.tweet.value)
+      writeTweet(event.target.tweet.value)
 
       setTimeout(() => {
         if (Math.floor(Math.random() * 2)) {
@@ -22,13 +24,7 @@ export default connect(
         }
       }, 1000)
 
-      e.preventDefault()
+      event.preventDefault()
     }
-
-    render() {
-      const { textarea } = this.props
-
-      return <Textarea {...textarea} onSubmit={e => this.handleSubmit(e)} />
-    }
-  }
-)
+  })
+)(Textarea)

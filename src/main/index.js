@@ -30,7 +30,18 @@ const createWindow = () => {
   })
 
   if (process.env.NODE_ENV === 'development') {
-    mainWindow.webContents.openDevTools()
+    const {
+      default: installExtension,
+      REACT_DEVELOPER_TOOLS
+    } = require('electron-devtools-installer')
+
+    installExtension(REACT_DEVELOPER_TOOLS)
+      .then(() => {
+        mainWindow.webContents.openDevTools()
+      })
+      .catch(() => {
+        mainWindow.webContents.openDevTools()
+      })
   }
 }
 
