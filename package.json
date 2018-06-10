@@ -8,17 +8,20 @@
   "license": "MIT",
   "scripts": {
     "start": "electron .",
-    "test": "electron .",
+    "test": "webpack --mode development && electron .",
     "fmt": "prettier --write 'src/**/*.js'",
     "dev": "webpack --mode development --watch",
     "prod": "webpack --mode production"
   },
   "dependencies": {
+    "dotenv": "^6.0.0",
+    "oauth": "^0.9.15",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-redux": "^5.0.7",
     "recompose": "^0.27.1",
     "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
     "styled-components": "^3.3.2"
   },
   "devDependencies": {
@@ -31,15 +34,5 @@
     "prettier": "^1.13.5",
     "webpack": "^4.12.0",
     "webpack-cli": "^3.0.3"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ]
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true
   }
 }

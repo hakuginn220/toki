@@ -1,10 +1,22 @@
 import path from 'path'
 import url from 'url'
+import { config } from 'dotenv'
 import { app, BrowserWindow } from 'electron'
 
 global.eval = () => {
   throw new Error(`Sorry, this app does not support global.eval().`)
 }
+
+const result = config()
+
+if (result.error) {
+  throw result.error
+}
+
+const { TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET } = result.parsed
+
+global.TWITTER_CONSUMER_KEY = TWITTER_CONSUMER_KEY
+global.TWITTER_CONSUMER_SECRET = TWITTER_CONSUMER_SECRET
 
 let mainWindow = null
 

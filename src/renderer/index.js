@@ -1,4 +1,4 @@
-import { webFrame } from 'electron'
+import { webFrame, remote } from 'electron'
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
@@ -11,6 +11,23 @@ window.eval = () => {
 }
 
 webFrame.setVisualZoomLevelLimits(1, 1)
+
+localStorage.setItem(
+  'TWITTER_CONSUMER_KEY',
+  remote.getGlobal('TWITTER_CONSUMER_KEY')
+)
+
+localStorage.setItem(
+  'TWITTER_CONSUMER_SECRET',
+  remote.getGlobal('TWITTER_CONSUMER_SECRET')
+)
+
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.body.appendChild(document.createElement('div'))
+)
 
 injectGlobal`
   :root {
@@ -54,10 +71,3 @@ injectGlobal`
     color: inherit;
   }
 `
-
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.body.appendChild(document.createElement('div'))
-)
