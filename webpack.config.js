@@ -3,6 +3,7 @@ const path = require('path')
 const isDevelopment = process.argv.some(value => value === 'development')
 
 const option = {
+  context: path.resolve('src'),
   output: {
     filename: '[name].js',
     path: path.resolve('bundle')
@@ -26,13 +27,11 @@ module.exports = [
   {
     ...option,
     target: 'electron-renderer',
-    entry: { renderer: './index.js' },
-    context: path.resolve('src/renderer')
+    entry: { renderer: ['babel-polyfill', './entry-renderer.js'] }
   },
   {
     ...option,
     target: 'electron-main',
-    entry: { main: './index.js' },
-    context: path.resolve('src/main')
+    entry: { main: ['babel-polyfill', './entry-main.js'] }
   }
 ]

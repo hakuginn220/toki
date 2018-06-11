@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import { injectGlobal } from 'styled-components'
 import store from './store'
 import App from './components/pages/app'
+import * as oauth2 from './api/oauth2'
 
 window.eval = () => {
   throw new Error(`Sorry, this app does not support window.eval().`)
@@ -12,22 +13,36 @@ window.eval = () => {
 
 webFrame.setVisualZoomLevelLimits(1, 1)
 
-localStorage.setItem(
-  'TWITTER_CONSUMER_KEY',
-  remote.getGlobal('TWITTER_CONSUMER_KEY')
-)
+async function main() {
+  localStorage.setItem(
+    'TWITTER_CONSUMER_KEY',
+    remote.getGlobal('TWITTER_CONSUMER_KEY')
+  )
 
-localStorage.setItem(
-  'TWITTER_CONSUMER_SECRET',
-  remote.getGlobal('TWITTER_CONSUMER_SECRET')
-)
+  localStorage.setItem(
+    'TWITTER_CONSUMER_SECRET',
+    remote.getGlobal('TWITTER_CONSUMER_SECRET')
+  )
 
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.body.appendChild(document.createElement('div'))
-)
+  const isAccessToken = localStorage.getItem('TWITTER_ACCESS_TOKEN')
+
+  if (!isAccessToken) {
+    const accessToken = await oauth2.getOAuthAccessToken()
+
+    localStorage.setItem('TWITTER_ACCESS_TOKEN', accessToken)
+  }
+
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.body.appendChild(document.createElement('div'))
+  )
+}
+
+main().catch(err => {
+  throw err
+})
 
 injectGlobal`
   :root {

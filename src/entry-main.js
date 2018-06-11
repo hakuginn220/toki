@@ -1,22 +1,47 @@
 import path from 'path'
 import url from 'url'
-import { config } from 'dotenv'
 import { app, BrowserWindow } from 'electron'
+import { config } from 'dotenv'
+import { OAuth, OAuth2 } from 'oauth'
 
 global.eval = () => {
   throw new Error(`Sorry, this app does not support global.eval().`)
 }
 
-const result = config()
+const env = config()
 
-if (result.error) {
-  throw result.error
+if (env.error) {
+  app.quit()
 }
 
-const { TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET } = result.parsed
+const {
+  TWITTER_CONSUMER_KEY,
+  TWITTER_CONSUMER_SECRET
+} = env.parsed
+
+const TWITTER_OAUTH_V1 = new OAuth(
+  'https://api.twitter.com/oauth/request_token',
+  'https://api.twitter.com/oauth/access_token',
+  TWITTER_CONSUMER_KEY,
+  TWITTER_CONSUMER_SECRET,
+  '1.0A',
+  null,
+  'HMAC-SHA1'
+)
+
+const TWITTER_OAUTH_V2 = new OAuth2(
+  TWITTER_CONSUMER_KEY,
+  TWITTER_CONSUMER_SECRET,
+  'https://api.twitter.com/',
+  null,
+  'oauth2/token',
+  null
+)
 
 global.TWITTER_CONSUMER_KEY = TWITTER_CONSUMER_KEY
 global.TWITTER_CONSUMER_SECRET = TWITTER_CONSUMER_SECRET
+global.TWITTER_OAUTH_V1 = TWITTER_OAUTH_V1
+global.TWITTER_OAUTH_V2 = TWITTER_OAUTH_V2
 
 let mainWindow = null
 
