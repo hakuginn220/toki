@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Favorite, Reply, Retweet } from '../atoms'
+import Favorite from '../atoms/favorite'
+import Reply from '../atoms/reply'
+import Retweet from '../atoms/retweet'
 
 export default ({ id, name, avatar, text, favorited, retweeted, created }) => (
   <Tweet>

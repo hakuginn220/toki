@@ -1,13 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default ({ navigation }) => (
+export default () => (
   <List>
-    {navigation.map(({ text, onClick }, index) => (
-      <Item key={index.toString()}>
-        <Button onClick={onClick}>{text}</Button>
-      </Item>
-    ))}
+    <Item key="oauth">
+      <Button>+</Button>
+    </Item>
   </List>
 )
 

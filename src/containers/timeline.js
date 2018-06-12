@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { compose, lifecycle } from 'recompose'
-import * as actions from '../actions'
+import * as actions from '../modules/timeline'
 import Timeline from '../components/organisms/timeline'
 
 function createDummyTweet() {

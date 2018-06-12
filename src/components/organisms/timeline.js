@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Tweet } from '../molecules'
+import Tweet from '../molecules/tweet'
 
 export default ({ tweets }) => (
   <List>
