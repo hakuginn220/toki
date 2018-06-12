@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import { injectGlobal } from 'styled-components'
 import store from './store'
 import App from './components/pages/app'
-import * as oauth2 from './api/oauth2'
+import * as oauth2 from './twitter/oauth2'
 
 window.eval = () => {
   throw new Error(`Sorry, this app does not support window.eval().`)
@@ -27,9 +27,9 @@ async function main() {
   const isAccessToken = localStorage.getItem('TWITTER_ACCESS_TOKEN')
 
   if (!isAccessToken) {
-    const accessToken = await oauth2.getOAuthAccessToken()
+    const token = await oauth2.postToken()
 
-    localStorage.setItem('TWITTER_ACCESS_TOKEN', accessToken)
+    localStorage.setItem('TWITTER_ACCESS_TOKEN', token.accessToken)
   }
 
   render(

@@ -1,15 +1,15 @@
 import { remote } from 'electron'
 
-const oauth2 = remote.getGlobal('TWITTER_OAUTH_V2')
+const oa = remote.getGlobal('TWITTER_OAUTH2')
 
-export function getOAuthAccessToken() {
+export function postToken() {
   return new Promise((resolve, reject) => {
-    oauth2.getOAuthAccessToken(
+    oa.getOAuthAccessToken(
       '',
       { grant_type: 'client_credentials' },
       (err, accessToken) => {
         if (err) return reject(err)
-        resolve(accessToken)
+        resolve({ accessToken })
       }
     )
   })

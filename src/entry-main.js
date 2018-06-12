@@ -19,7 +19,7 @@ const {
   TWITTER_CONSUMER_SECRET
 } = env.parsed
 
-const TWITTER_OAUTH_V1 = new OAuth(
+const oauth = new OAuth(
   'https://api.twitter.com/oauth/request_token',
   'https://api.twitter.com/oauth/access_token',
   TWITTER_CONSUMER_KEY,
@@ -29,7 +29,7 @@ const TWITTER_OAUTH_V1 = new OAuth(
   'HMAC-SHA1'
 )
 
-const TWITTER_OAUTH_V2 = new OAuth2(
+const oauth2 = new OAuth2(
   TWITTER_CONSUMER_KEY,
   TWITTER_CONSUMER_SECRET,
   'https://api.twitter.com/',
@@ -40,8 +40,8 @@ const TWITTER_OAUTH_V2 = new OAuth2(
 
 global.TWITTER_CONSUMER_KEY = TWITTER_CONSUMER_KEY
 global.TWITTER_CONSUMER_SECRET = TWITTER_CONSUMER_SECRET
-global.TWITTER_OAUTH_V1 = TWITTER_OAUTH_V1
-global.TWITTER_OAUTH_V2 = TWITTER_OAUTH_V2
+global.TWITTER_OAUTH = oauth
+global.TWITTER_OAUTH2 = oauth2
 
 let mainWindow = null
 
