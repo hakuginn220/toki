@@ -1,5 +1,13 @@
-import { createStore, applyMiddleware } from 'redux'
+import { combineReducers, createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import reducers from './reducers'
+import account from './modules/account'
+import textarea from './reducers/textarea'
+import timeline from './reducers/timeline'
+
+const reducers = combineReducers({
+  account,
+  textarea,
+  timeline
+})
 
 export default createStore(reducers, applyMiddleware(thunk))
