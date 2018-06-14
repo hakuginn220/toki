@@ -14,10 +14,7 @@ if (env.error) {
   app.quit()
 }
 
-const {
-  TWITTER_CONSUMER_KEY,
-  TWITTER_CONSUMER_SECRET
-} = env.parsed
+const { TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET } = env.parsed
 
 const oauth = new OAuth(
   'https://api.twitter.com/oauth/request_token',

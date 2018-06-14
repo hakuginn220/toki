@@ -4,26 +4,40 @@ import Favorite from '../atoms/favorite'
 import Reply from '../atoms/reply'
 import Retweet from '../atoms/retweet'
 
-export default ({ id, name, avatar, text, favorited, retweeted, created }) => (
-  <Tweet>
-    <Avatar src={avatar} alt={name} />
-    <UserList>
-      {[<Name>{name}</Name>, <Id>@{id}</Id>, <Created>{created}</Created>].map(
-        (value, index) => <UserItem key={index.toString()}>{value}</UserItem>
-      )}
-    </UserList>
-    <Text>{text}</Text>
-    <ButtonList>
-      {[
-        <Reply />,
-        <Retweet retweeted={retweeted} />,
-        <Favorite favorited={favorited} />
-      ].map((value, index) => (
-        <ButtonItem key={index.toString()}>{value}</ButtonItem>
-      ))}
-    </ButtonList>
-  </Tweet>
-)
+export default function Tweet({
+  id,
+  name,
+  avatar,
+  text,
+  favorited,
+  retweeted,
+  created
+}) {
+  return (
+    <Tweet>
+      <Avatar src={avatar} alt={name} />
+      <UserList>
+        {[
+          <Name>{name}</Name>,
+          <Id>@{id}</Id>,
+          <Created>{created}</Created>
+        ].map((value, index) => (
+          <UserItem key={index.toString()}>{value}</UserItem>
+        ))}
+      </UserList>
+      <Text>{text}</Text>
+      <ButtonList>
+        {[
+          <Reply />,
+          <Retweet retweeted={retweeted} />,
+          <Favorite favorited={favorited} />
+        ].map((value, index) => (
+          <ButtonItem key={index.toString()}>{value}</ButtonItem>
+        ))}
+      </ButtonList>
+    </Tweet>
+  )
+}
 
 const Tweet = styled.div`
   position: relative;

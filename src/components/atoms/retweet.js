@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default ({ retweeted }) => <Button retweeted={retweeted}>Retweet</Button>
+export default function Retweet({ retweeted }) {
+  return <Button retweeted={retweeted}>Retweet</Button>
+}
 
 const Button = styled.button`
   display: inline-block;

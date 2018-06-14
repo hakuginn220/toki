@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default () => <Button>Reply</Button>
+export default function Reply() {
+  return <Button>Reply</Button>
+}
 
 const Button = styled.button`
   display: inline-block;

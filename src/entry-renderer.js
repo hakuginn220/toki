@@ -4,7 +4,7 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { injectGlobal } from 'styled-components'
 import store from './store'
-import App from './components/pages/app'
+import App from './app'
 import * as oauth2 from './twitter/oauth2'
 
 window.eval = () => {

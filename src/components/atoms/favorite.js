@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default ({ favorited }) => (
-  <Button favorited={favorited}>Favorite</Button>
-)
+export default function Favorite({ favorited }) {
+  return <Button favorited={favorited}>Favorite</Button>
+}
 
 const Button = styled.button`
   display: inline-block;

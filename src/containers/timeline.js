@@ -19,7 +19,7 @@ function createDummyTweet() {
   }
 }
 
-export default compose(
+const enhance = compose(
   connect(
     state => state.timeline,
     dispatch => bindActionCreators(actions, dispatch)
@@ -33,4 +33,6 @@ export default compose(
       }, 2000)
     }
   })
-)(Timeline)
+)
+
+export default enhance(Timeline)

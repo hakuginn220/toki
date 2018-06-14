@@ -2,17 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 import Tweet from '../molecules/tweet'
 
-export default ({ tweets }) => (
-  <List>
-    {tweets.map((tweet, index) => (
-      <Item key={index.toString()}>
-        <Tweet {...tweet} />
-      </Item>
-    ))}
-  </List>
-)
+export default function Timeline({ tweets }) {
+  return (
+    <Group>
+      {tweets.map((tweet, index) => (
+        <GroupItem key={index.toString()}>
+          <Tweet {...tweet} />
+        </GroupItem>
+      ))}
+    </Group>
+  )
+}
 
-const List = styled.ul`
+const Group = styled.ul`
   display: flex;
   flex-direction: column-reverse;
   margin: 0;
@@ -20,6 +22,6 @@ const List = styled.ul`
   list-style-type: none;
 `
 
-const Item = styled.li`
+const GroupItem = styled.li`
   display: block;
 `
