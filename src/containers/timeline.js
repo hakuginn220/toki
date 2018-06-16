@@ -9,13 +9,12 @@ function createDummyTweet() {
     .toString(36)
     .slice(-8)
   return {
-    id: unique,
-    name: unique,
-    avatar: 'https://placehold.jp/48x48.png',
-    text: `tweet for ${unique}`,
-    favorited: !!Math.floor(Math.random() * 2),
-    retweeted: !!Math.floor(Math.random() * 2),
-    created: Date()
+    text: unique,
+    user: {
+      name: unique,
+      screen_name: unique,
+      profile_image_url_https: 'https://placehold.jp/48x48.png'
+    }
   }
 }
 
