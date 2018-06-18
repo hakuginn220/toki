@@ -1,15 +1,15 @@
 import url from 'url'
 import { OAuth } from 'oauth'
 
-export default class Twitter {
-  constructor(config = {}) {
-    const defaults = {
-      consumer_key: null,
-      consumer_secret: null,
-      access_token: null,
-      access_token_secret: null
-    }
+const defaults = {
+  consumer_key: null,
+  consumer_secret: null,
+  access_token: null,
+  access_token_secret: null
+}
 
+export default class Twitter {
+  constructor(config = defaults) {
     this.config = Object.assign({}, defaults, config)
 
     this.hostname = 'api.twitter.com'
