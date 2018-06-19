@@ -12,7 +12,7 @@ export default (state = initialState, action = {}) => {
     case ADD_USER:
       return {
         ...state,
-        users: state.user.concat(action.payload.user)
+        users: state.users.concat(action.payload.user)
       }
 
     case REMOVE_USER:
