@@ -9,7 +9,7 @@
   "scripts": {
     "start": "electron .",
     "test": "webpack --mode development && electron .",
-    "fmt": "prettier --write 'src/**/*.js'",
+    "fmt": "prettier --write 'src/**/*.{js,ts,tsx}'",
     "dev": "webpack --mode development --watch",
     "prod": "webpack --mode production",
     "precommit": "lint-staged"
@@ -42,7 +42,7 @@
     "webpack-cli": "^3.0.8"
   },
   "lint-staged": {
-    "*.{js,json,md}": [
+    "*.{js,ts,tsx}": [
       "prettier --write",
       "git add"
     ]
