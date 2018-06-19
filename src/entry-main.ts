@@ -1,11 +1,11 @@
-import path from 'path'
-import url from 'url'
+import * as path from 'path'
+import * as url from 'url'
 import { app, BrowserWindow } from 'electron'
 import { config } from 'dotenv'
 import Twitter from './twitter'
 
 global.eval = () => {
-  throw new Error(`Sorry, this app does not support global.eval().`)
+  throw new Error('Sorry, this app does not support global.eval().')
 }
 
 const env = config()
@@ -16,7 +16,7 @@ if (env.error) {
 
 const { TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET } = env.parsed
 
-global.twitter = new Twitter({
+global['twitter'] = new Twitter({
   consumer_key: TWITTER_CONSUMER_KEY,
   consumer_secret: TWITTER_CONSUMER_SECRET
 })
@@ -28,8 +28,7 @@ const createWindow = () => {
     width: 800,
     height: 600,
     minWidth: 800,
-    minHeight: 600,
-    nodeIntegration: false
+    minHeight: 600
   })
 
   mainWindow.loadURL(
@@ -45,18 +44,7 @@ const createWindow = () => {
   })
 
   if (process.env.NODE_ENV === 'development') {
-    const {
-      default: installExtension,
-      REACT_DEVELOPER_TOOLS
-    } = require('electron-devtools-installer')
-
-    installExtension(REACT_DEVELOPER_TOOLS)
-      .then(() => {
-        mainWindow.webContents.openDevTools()
-      })
-      .catch(() => {
-        mainWindow.webContents.openDevTools()
-      })
+    mainWindow.webContents.openDevTools()
   }
 }
 

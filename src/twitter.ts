@@ -1,7 +1,14 @@
-import url from 'url'
+import * as url from 'url'
 import { OAuth } from 'oauth'
 
-const defaults = {
+type TConfig = {
+  consumer_key: string | null
+  consumer_secret: string | null
+  access_token?: string | null
+  access_token_secret?: string | null
+}
+
+const defaults: TConfig = {
   consumer_key: null,
   consumer_secret: null,
   access_token: null,
@@ -9,15 +16,20 @@ const defaults = {
 }
 
 export default class Twitter {
-  constructor(config = defaults) {
+  config: TConfig
+  client: OAuth
+  hostname: string
+  version: string
+
+  constructor(config: TConfig) {
     this.config = Object.assign({}, defaults, config)
 
     this.hostname = 'api.twitter.com'
     this.version = '1.1'
 
     this.client = new OAuth(
-      `${this.oauth}/oauth/request_token`,
-      `${this.oauth}/oauth/access_token`,
+      `${this.hostname}/oauth/request_token`,
+      `${this.hostname}/oauth/access_token`,
       this.config.consumer_key,
       this.config.consumer_secret,
       '1.0A',
@@ -67,8 +79,8 @@ export default class Twitter {
 
       this.client.get(
         endpoint,
-        this.access_token,
-        this.access_token_secret,
+        this.config.access_token,
+        this.config.access_token_secret,
         (err, data) => {
           if (err) reject(err)
           resolve(data)
@@ -81,15 +93,16 @@ export default class Twitter {
     return new Promise((resolve, reject) => {
       const endpoint = url.format({
         protocol: 'https',
-        host: this.host,
+        host: this.hostname,
         pathname: `${this.version}/${resource}.json`
       })
 
       this.client.post(
         endpoint,
-        this.access_token,
-        this.access_token_secret,
+        this.config.access_token,
+        this.config.access_token_secret,
         body,
+        null,
         (err, data) => {
           if (err) reject(err)
           resolve(data)
@@ -102,15 +115,16 @@ export default class Twitter {
     return new Promise((resolve, reject) => {
       const endpoint = url.format({
         protocol: 'https',
-        host: this.host,
+        host: this.hostname,
         pathname: `${this.version}/${resource}.json`
       })
 
       this.client.put(
         endpoint,
-        this.access_token,
-        this.access_token_secret,
+        this.config.access_token,
+        this.config.access_token_secret,
         body,
+        null,
         (err, data) => {
           if (err) reject(err)
           resolve(data)
@@ -120,20 +134,22 @@ export default class Twitter {
   }
 
   delete(resource = '') {
-    const endpoint = url.format({
-      protocol: 'https',
-      host: this.host,
-      pathname: `${this.version}/${resource}.json`
-    })
+    return new Promise((resolve, reject) => {
+      const endpoint = url.format({
+        protocol: 'https',
+        host: this.hostname,
+        pathname: `${this.version}/${resource}.json`
+      })
 
-    this.client.delete(
-      endpoint,
-      this.access_token,
-      this.access_token_secret,
-      (err, data) => {
-        if (err) reject(err)
-        resolve(data)
-      }
-    )
+      this.client.delete(
+        endpoint,
+        this.config.access_token,
+        this.config.access_token_secret,
+        (err, data) => {
+          if (err) reject(err)
+          resolve(data)
+        }
+      )
+    })
   }
 }

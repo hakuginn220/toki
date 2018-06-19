@@ -7,7 +7,7 @@ import store from './store'
 import App from './app'
 
 window.eval = () => {
-  throw new Error(`Sorry, this app does not support window.eval().`)
+  throw new Error('Sorry, this app does not support window.eval().')
 }
 
 webFrame.setVisualZoomLevelLimits(1, 1)

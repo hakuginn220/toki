@@ -14,8 +14,15 @@ const option = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: 'babel-loader'
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader'
       }
     ]
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js']
   }
 }
 
@@ -32,6 +39,6 @@ module.exports = [
   {
     ...option,
     target: 'electron-main',
-    entry: { main: ['babel-polyfill', './entry-main.js'] }
+    entry: { main: './entry-main.ts' }
   }
 ]
