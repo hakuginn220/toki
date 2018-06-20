@@ -11,18 +11,13 @@ const option = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: 'babel-loader'
-      },
-      {
         test: /\.tsx?$/,
         use: 'ts-loader'
       }
     ]
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js']
+    extensions: ['.ts', '.tsx', '.js', '.json']
   }
 }
 
@@ -34,7 +29,7 @@ module.exports = [
   {
     ...option,
     target: 'electron-renderer',
-    entry: { renderer: ['babel-polyfill', './entry-renderer.js'] }
+    entry: { renderer: './entry-renderer.tsx' }
   },
   {
     ...option,
