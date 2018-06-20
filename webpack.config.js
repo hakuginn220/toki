@@ -1,4 +1,5 @@
 const path = require('path')
+const { CheckerPlugin } = require('awesome-typescript-loader')
 
 const isDevelopment = process.argv.some(value => value === 'development')
 
@@ -12,7 +13,7 @@ const option = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader'
+        use: 'awesome-typescript-loader'
       }
     ]
   },
@@ -23,6 +24,7 @@ const option = {
 
 if (isDevelopment) {
   option.devtool = 'source-map'
+  option.plugins = [new CheckerPlugin()]
 }
 
 module.exports = [

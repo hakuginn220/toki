@@ -49,6 +49,17 @@ export default class Twitter {
     })
   }
 
+  getAuthorize({ oauth_token = '' }) {
+    return url.format({
+      protocol: 'https',
+      hostname: this.hostname,
+      pathname: 'oauth/authorize',
+      query: {
+        oauth_token
+      }
+    })
+  }
+
   getAccessToken({ oauth_token = '', oauth_token_secret = '', verifier = '' }) {
     return new Promise((resolve, reject) => {
       this.client.getOAuthAccessToken(
