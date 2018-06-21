@@ -7,9 +7,9 @@ export type TimelineProps = {
 
 export default function Timeline(props: TimelineProps) {
   return (
-    <ul>
+    <ul className="tile is-parent is-vertical">
       {props.tweets.map((tweet, index) => (
-        <li key={index.toString()}>
+        <li className="tile is-child" key={index.toString()}>
           <Tweet {...tweet} />
         </li>
       ))}

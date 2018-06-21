@@ -15,6 +15,7 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
+    "bulma": "^0.7.1",
     "dotenv": "^6.0.0",
     "mobx": "^5.0.3",
     "mobx-react": "^5.2.3",

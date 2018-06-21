@@ -11,11 +11,27 @@ export type TweetProps = {
 
 export default function Tweet(props: TweetProps) {
   return (
-    <div>
-      <img src={props.user.profile_image_url_https} alt={props.user.name} />
-      <p>{props.user.name}</p>
-      <p>@{props.user.screen_name}</p>
-      <p>{props.text}</p>
+    <div className="box">
+      <div className="media">
+        <div className="media-left">
+          <figure className="image is-64x64">
+            <img
+              src={props.user.profile_image_url_https}
+              alt={props.user.name}
+            />
+          </figure>
+        </div>
+        <div className="media-content">
+          <div className="content">
+            <p>
+              <strong>{props.user.name}</strong>{' '}
+              <small>@{props.user.screen_name}</small>
+              <br />
+              {props.text}
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

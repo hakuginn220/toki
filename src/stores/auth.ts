@@ -24,7 +24,7 @@ export default class Auth {
 
   @action.bound
   async openAuthorize() {
-    const twitter = remote.getGlobal('twitter')
+    const { twitter } = remote.require('./main')
     const token: TToken = await twitter.getRequestToken()
     const url = twitter.getAuthorize(token)
     this.token = token

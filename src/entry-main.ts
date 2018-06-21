@@ -15,14 +15,12 @@ if (env.error) {
   app.quit()
 }
 
-const { TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET } = env.parsed
-
-global['twitter'] = new Twitter({
-  consumer_key: TWITTER_CONSUMER_KEY,
-  consumer_secret: TWITTER_CONSUMER_SECRET
+export const twitter = new Twitter({
+  consumer_key: env.parsed ? env.parsed.TWITTER_CONSUMER_KEY : '',
+  consumer_secret: env.parsed ? env.parsed.TWITTER_CONSUMER_SECRET : ''
 })
 
-let mainWindow = null
+let mainWindow: BrowserWindow | null = null
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({

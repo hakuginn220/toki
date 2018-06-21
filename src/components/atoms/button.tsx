@@ -8,10 +8,18 @@ export type ButtonProps = {
 
 export default function Button(props: ButtonProps) {
   if (props.onSubmit) {
-    return <button onSubmit={props.onSubmit}>{props.children}</button>
+    return (
+      <button className="button" onSubmit={props.onSubmit}>
+        {props.children}
+      </button>
+    )
   } else if (props.onClick) {
-    return <button onClick={props.onClick}>{props.children}</button>
+    return (
+      <button className="button" onClick={props.onClick}>
+        {props.children}
+      </button>
+    )
   } else {
-    return <button>{props.children}</button>
+    return <button className="button">{props.children}</button>
   }
 }
