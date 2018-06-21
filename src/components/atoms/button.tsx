@@ -1,11 +1,17 @@
 import * as React from 'react'
 
-export default function Button({ text = '', onClick, onSubmit }) {
-  if (onSubmit) {
-    return <button onSubmit={onSubmit}>{text}</button>
-  } else if (onClick) {
-    return <button onClick={onClick}>{text}</button>
+export type ButtonProps = {
+  children: Node
+  onClick?: () => void
+  onSubmit?: () => void
+}
+
+export default function Button(props: ButtonProps) {
+  if (props.onSubmit) {
+    return <button onSubmit={props.onSubmit}>{props.children}</button>
+  } else if (props.onClick) {
+    return <button onClick={props.onClick}>{props.children}</button>
   } else {
-    return <button>{text}</button>
+    return <button>{props.children}</button>
   }
 }

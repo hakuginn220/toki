@@ -1,10 +1,14 @@
 import * as React from 'react'
-import Tweet from '../molecules/tweet'
+import Tweet, { TweetProps } from '../molecules/tweet'
 
-export default function Timeline({ tweets = [] }) {
+export type TimelineProps = {
+  tweets: TweetProps[]
+}
+
+export default function Timeline(props: TimelineProps) {
   return (
     <ul>
-      {tweets.map((tweet, index) => (
+      {props.tweets.map((tweet, index) => (
         <li key={index.toString()}>
           <Tweet {...tweet} />
         </li>

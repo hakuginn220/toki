@@ -1,21 +1,21 @@
 import * as React from 'react'
 
-const initialTweet = {
-  text: '',
+export type TweetProps = {
+  text: string
   user: {
-    name: '',
-    screen_name: '',
-    profile_image_url_https: ''
+    name: string
+    screen_name: string
+    profile_image_url_https: string
   }
 }
 
-export default function Tweet(tweet = initialTweet) {
+export default function Tweet(props: TweetProps) {
   return (
     <div>
-      <img src={tweet.user.profile_image_url_https} alt={tweet.user.name} />
-      <p>{tweet.user.name}</p>
-      <p>@{tweet.user.screen_name}</p>
-      <p>{tweet.text}</p>
+      <img src={props.user.profile_image_url_https} alt={props.user.name} />
+      <p>{props.user.name}</p>
+      <p>@{props.user.screen_name}</p>
+      <p>{props.text}</p>
     </div>
   )
 }
