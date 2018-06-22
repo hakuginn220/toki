@@ -1,23 +1,21 @@
 import * as url from 'url'
 import { OAuth } from 'oauth'
 
-type Token = {
+export type Token = {
   oauth_token: string
   oauth_token_secret: string
 }
 
-type AccessToken = {
+export type AccessToken = {
   access_token: string
   access_token_secret: string
 }
 
-type TwitterConfig = AccessToken & {
-  consumer_key: string
-  consumer_secret: string
-}
-
 export default class Twitter {
-  config: TwitterConfig
+  config: AccessToken & {
+    consumer_key: string
+    consumer_secret: string
+  }
   client: OAuth
   hostname: string
   version: string
