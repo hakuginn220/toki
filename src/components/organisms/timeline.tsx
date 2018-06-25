@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Tweet, { TweetProps } from '../molecules/tweet'
+import styled from 'styled-components'
 
 export type TimelineProps = {
   tweets: TweetProps[]
@@ -7,12 +8,27 @@ export type TimelineProps = {
 
 export default function Timeline(props: TimelineProps) {
   return (
-    <ul className="tile is-parent is-vertical">
+    <Group>
       {props.tweets.map((tweet, index) => (
-        <li className="tile is-child" key={index.toString()}>
+        <Item key={index.toString()}>
           <Tweet {...tweet} />
-        </li>
+        </Item>
       ))}
-    </ul>
+    </Group>
   )
 }
+
+const Group = styled.ul`
+  display: block;
+  margin: 0;
+  padding: 1em;
+  list-style-type: none;
+`
+
+const Item = styled.li`
+  display: block;
+  margin: 0 0 1em;
+  &:last-child {
+    margin: 0;
+  }
+`

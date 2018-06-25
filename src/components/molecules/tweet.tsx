@@ -1,4 +1,11 @@
 import * as React from 'react'
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  Avatar,
+  Typography
+} from '@material-ui/core'
 
 export type TweetProps = {
   text: string
@@ -10,28 +17,20 @@ export type TweetProps = {
 }
 
 export default function Tweet(props: TweetProps) {
+  const header = {
+    avatar: (
+      <Avatar src={props.user.profile_image_url_https} alt={props.user.name} />
+    ),
+    title: `${props.user.name} @${props.user.screen_name}`,
+    subheader: 'September 14, 2016'
+  }
+
   return (
-    <div className="box">
-      <div className="media">
-        <div className="media-left">
-          <figure className="image is-64x64">
-            <img
-              src={props.user.profile_image_url_https}
-              alt={props.user.name}
-            />
-          </figure>
-        </div>
-        <div className="media-content">
-          <div className="content">
-            <p>
-              <strong>{props.user.name}</strong>{' '}
-              <small>@{props.user.screen_name}</small>
-              <br />
-              {props.text}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Card>
+      <CardContent>
+        <CardHeader {...header} />
+        <Typography component="p">{props.text}</Typography>
+      </CardContent>
+    </Card>
   )
 }
