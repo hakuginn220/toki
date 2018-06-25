@@ -1,15 +1,10 @@
 import { remote, shell } from 'electron'
 import { observable, action } from 'mobx'
-import Twitter, { Token, AccessToken } from '../twitter'
-
-type Main = {
-  twitter: Twitter
-}
-
-type Users = AccessToken[]
+import { Main } from '../main'
+import { Token, AccessToken } from '../twitter'
 
 export default class Auth {
-  @observable users: Users = []
+  @observable users: AccessToken[] = []
 
   @observable
   token: Token = {
@@ -28,7 +23,7 @@ export default class Auth {
 
   @action.bound
   async getAccessToken(verifier: string) {
-    const { twitter }: Main = remote.getGlobal('twitter')
+    const { twitter }: Main = remote.require('./main')
     const token = await twitter.getAccessToken({
       ...this.token,
       verifier

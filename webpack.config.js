@@ -18,7 +18,7 @@ const option = {
     ]
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.json']
+    extensions: ['.ts', '.tsx', '.js']
   }
 }
 
@@ -31,11 +31,11 @@ module.exports = [
   {
     ...option,
     target: 'electron-renderer',
-    entry: { renderer: './entry-renderer.tsx' }
+    entry: { renderer: './renderer.tsx' }
   },
   {
     ...option,
     target: 'electron-main',
-    entry: { main: './entry-main.ts' }
+    entry: { main: './main.ts' }
   }
 ]
