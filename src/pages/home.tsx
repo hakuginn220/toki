@@ -1,15 +1,11 @@
-import * as React from 'react'
 import { observer } from 'mobx-react'
-import Home, { HomeProps } from '../components/templates/home'
+import * as React from 'react'
+import Home, { IHome } from '../components/templates/home'
 import { createTweet } from '../util'
 
-type TProps = any
-
-type TState = HomeProps
-
 @observer
-export default class HomeContainer extends React.Component<TProps, TState> {
-  constructor(props: TProps) {
+export default class HomeContainer extends React.Component<any, IHome> {
+  constructor(props: any) {
     super(props)
     this.state = {
       timeline: {
@@ -18,7 +14,7 @@ export default class HomeContainer extends React.Component<TProps, TState> {
     }
   }
 
-  render() {
+  public render() {
     return <Home {...this.state} />
   }
 }

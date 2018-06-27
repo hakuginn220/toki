@@ -1,4 +1,3 @@
-/// <reference types="electron" />
 import { webFrame } from 'electron'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'

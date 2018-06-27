@@ -1,6 +1,6 @@
-import * as React from 'react'
-import { Provider } from 'mobx-react'
 import { CssBaseline } from '@material-ui/core'
+import { Provider } from 'mobx-react'
+import * as React from 'react'
 import Home from './pages/home'
 import Auth from './stores/auth'
 
@@ -9,7 +9,7 @@ const stores = {
 }
 
 export default class App extends React.Component {
-  render() {
+  public render() {
     return (
       <React.Fragment>
         <CssBaseline />

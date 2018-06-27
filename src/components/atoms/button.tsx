@@ -1,12 +1,12 @@
 import * as React from 'react'
 
-export type ButtonProps = {
+export interface IButton {
   children: Node
   onClick?: () => void
   onSubmit?: () => void
 }
 
-export default function Button(props: ButtonProps) {
+export default function Button(props: IButton) {
   if (props.onSubmit) {
     return (
       <button className="button" onSubmit={props.onSubmit}>

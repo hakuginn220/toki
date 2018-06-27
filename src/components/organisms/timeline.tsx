@@ -1,12 +1,12 @@
 import * as React from 'react'
-import Tweet, { TweetProps } from '../molecules/tweet'
 import styled from 'styled-components'
+import Tweet, { ITweet } from '../molecules/tweet'
 
-export type TimelineProps = {
-  tweets: TweetProps[]
+export interface ITimeline {
+  tweets: ITweet[]
 }
 
-export default function Timeline(props: TimelineProps) {
+export default function Timeline(props: ITimeline) {
   return (
     <Group>
       {props.tweets.map((tweet, index) => (

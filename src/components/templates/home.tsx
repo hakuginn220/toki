@@ -1,10 +1,10 @@
 import * as React from 'react'
-import Timeline, { TimelineProps } from '../organisms/timeline'
+import Timeline, { ITimeline } from '../organisms/timeline'
 
-export type HomeProps = {
-  timeline: TimelineProps
+export interface IHome {
+  timeline: ITimeline
 }
 
-export default function Home(props: HomeProps) {
+export default function Home(props: IHome) {
   return <Timeline {...props.timeline} />
 }

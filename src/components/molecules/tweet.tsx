@@ -1,28 +1,28 @@
-import * as React from 'react'
 import {
+  Avatar,
   Card,
   CardContent,
   CardHeader,
-  Avatar,
   Typography
 } from '@material-ui/core'
+import * as React from 'react'
 
-export type TweetProps = {
+export interface ITweet {
   text: string
   user: {
     name: string
-    screen_name: string
     profile_image_url_https: string
+    screen_name: string
   }
 }
 
-export default function Tweet(props: TweetProps) {
+export default function Tweet(props: ITweet) {
   const header = {
     avatar: (
       <Avatar src={props.user.profile_image_url_https} alt={props.user.name} />
     ),
-    title: `${props.user.name} @${props.user.screen_name}`,
-    subheader: 'September 14, 2016'
+    subheader: 'September 14, 2016',
+    title: `${props.user.name} @${props.user.screen_name}`
   }
 
   return (

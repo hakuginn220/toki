@@ -1,8 +1,7 @@
-/// <reference types="electron" />
+import { config } from 'dotenv'
+import { app, BrowserWindow } from 'electron'
 import * as path from 'path'
 import * as url from 'url'
-import { app, BrowserWindow } from 'electron'
-import { config } from 'dotenv'
 import Twitter from './twitter'
 
 global.eval = () => {
@@ -15,7 +14,7 @@ if (env.error) {
   app.quit()
 }
 
-export type Main = {
+export interface IMain {
   twitter: Twitter
 }
 
@@ -28,10 +27,10 @@ let mainWindow: BrowserWindow | null = null
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
-    width: 800,
     height: 600,
+    minHeight: 600,
     minWidth: 800,
-    minHeight: 600
+    width: 800
   })
 
   mainWindow.loadURL(

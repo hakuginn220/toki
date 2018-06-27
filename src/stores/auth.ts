@@ -1,20 +1,14 @@
 import { remote, shell } from 'electron'
-import { observable, action } from 'mobx'
-import { Main } from '../main'
-import { Token, AccessToken } from '../twitter'
+import { action, observable } from 'mobx'
+import { IMain } from '../main'
 
 export default class Auth {
-  @observable users: AccessToken[] = []
-
-  @observable
-  token: Token = {
-    oauth_token: '',
-    oauth_token_secret: ''
-  }
+  @observable public users: any[] = []
+  @observable public token: any
 
   @action.bound
-  async openAuthorize() {
-    const { twitter }: Main = remote.require('./main')
+  public async openAuthorize() {
+    const { twitter }: IMain = remote.require('./main')
     const token = await twitter.getRequestToken()
     const url = twitter.getAuthorize(token)
     this.token = token
@@ -22,8 +16,8 @@ export default class Auth {
   }
 
   @action.bound
-  async getAccessToken(verifier: string) {
-    const { twitter }: Main = remote.require('./main')
+  public async getAccessToken(verifier: string) {
+    const { twitter }: IMain = remote.require('./main')
     const token = await twitter.getAccessToken({
       ...this.token,
       verifier

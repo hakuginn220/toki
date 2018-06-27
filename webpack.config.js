@@ -5,17 +5,22 @@ const isDevelopment = process.argv.some(value => value === 'development')
 
 const option = {
   context: path.resolve('src'),
-  output: {
-    filename: '[name].js',
-    path: path.resolve('bundle')
-  },
   module: {
     rules: [
+      {
+        enforce: 'pre',
+        test: /\.tsx?$/,
+        use: 'tslint-loader'
+      },
       {
         test: /\.tsx?$/,
         use: 'awesome-typescript-loader'
       }
     ]
+  },
+  output: {
+    filename: '[name].js',
+    path: path.resolve('bundle')
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
@@ -30,12 +35,12 @@ if (isDevelopment) {
 module.exports = [
   {
     ...option,
-    target: 'electron-renderer',
-    entry: { renderer: './renderer.tsx' }
+    entry: { renderer: './renderer.tsx' },
+    target: 'electron-renderer'
   },
   {
     ...option,
-    target: 'electron-main',
-    entry: { main: './main.ts' }
+    entry: { main: './main.ts' },
+    target: 'electron-main'
   }
 ]
