@@ -3,8 +3,8 @@ import { action, observable } from 'mobx'
 import { IMain } from '../main'
 
 export default class Auth {
-  @observable public users: any[] = []
-  @observable public token: any
+  @observable.deep public users: any[] = []
+  @observable.deep public token: any
 
   @action.bound
   public async openAuthorize() {
