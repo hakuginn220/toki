@@ -19,7 +19,7 @@ const option = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve('bundle')
+    path: path.resolve('dist')
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
@@ -33,12 +33,12 @@ if (development) {
 module.exports = [
   {
     ...option,
-    entry: { renderer: './renderer.tsx' },
+    entry: { renderer: './renderer/main.tsx' },
     target: 'electron-renderer'
   },
   {
     ...option,
-    entry: { main: './main.ts' },
+    entry: { main: './main/main.ts' },
     target: 'electron-main'
   }
 ]

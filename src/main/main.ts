@@ -33,10 +33,14 @@ const createWindow = () => {
     width: 800
   })
 
+  if (process.env.NODE_ENV === 'development') {
+    mainWindow.webContents.openDevTools()
+  }
+
   mainWindow.loadURL(
     url.format({
       pathname: path.resolve('index.html'),
-      protocol: 'file:',
+      protocol: 'file',
       slashes: true
     })
   )
@@ -44,10 +48,6 @@ const createWindow = () => {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
-
-  if (process.env.NODE_ENV === 'development') {
-    mainWindow.webContents.openDevTools()
-  }
 }
 
 const isSecondInstance = app.makeSingleInstance(() => {

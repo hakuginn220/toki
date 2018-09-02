@@ -1,6 +1,6 @@
 import { remote, shell } from 'electron'
 import { action, observable } from 'mobx'
-import { IMain } from '../main'
+import { IMain } from '../../main/main'
 
 export default class Auth {
   @observable.deep

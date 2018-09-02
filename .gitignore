@@ -7,5 +7,5 @@ node_modules
 *.log
 
 # product
-bundle
+dist
 .env
