@@ -1,4 +1,4 @@
-import { IMain } from '@/main'
+import { IMain } from 'common/main'
 import { remote, shell } from 'electron'
 import { action, observable } from 'mobx'
 

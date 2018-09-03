@@ -14,10 +14,6 @@ if (env.error) {
   app.quit()
 }
 
-export interface IMain {
-  twitter: Twitter
-}
-
 export const twitter = new Twitter({
   consumer_key: env.parsed ? env.parsed.TWITTER_CONSUMER_KEY : '',
   consumer_secret: env.parsed ? env.parsed.TWITTER_CONSUMER_SECRET : ''
