@@ -1,4 +1,4 @@
-import { ITweet } from './components/molecules/tweet'
+import { ITweet } from '@/components/molecules/tweet'
 
 export function createTweet(): ITweet {
   const unique = Math.random()

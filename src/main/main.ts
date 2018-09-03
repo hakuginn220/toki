@@ -1,8 +1,8 @@
+import Twitter from '@/twitter'
 import { config } from 'dotenv'
 import { app, BrowserWindow } from 'electron'
 import * as path from 'path'
 import * as url from 'url'
-import Twitter from './twitter'
 
 global.eval = () => {
   throw new Error('Sorry, this app does not support global.eval().')

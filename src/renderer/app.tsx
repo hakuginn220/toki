@@ -1,7 +1,7 @@
+import Home from '@/pages/home'
+import Auth from '@/stores/auth'
 import { Provider } from 'mobx-react'
 import * as React from 'react'
-import Home from './pages/home'
-import Auth from './stores/auth'
 
 const stores = {
   auth: new Auth()

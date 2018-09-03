@@ -1,6 +1,6 @@
+import Tweet, { ITweet } from '@/components/molecules/tweet'
 import * as React from 'react'
 import styled from 'styled-components'
-import Tweet, { ITweet } from '../molecules/tweet'
 
 export interface ITimeline {
   tweets: ITweet[]

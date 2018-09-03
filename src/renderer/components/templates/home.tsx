@@ -1,5 +1,5 @@
+import Timeline, { ITimeline } from '@/components/organisms/timeline'
 import * as React from 'react'
-import Timeline, { ITimeline } from '../organisms/timeline'
 
 export interface IHome {
   timeline: ITimeline
