@@ -33,17 +33,20 @@ const createWindow = () => {
     width: 800
   })
 
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV !== 'production') {
     mainWindow.webContents.openDevTools()
+    mainWindow.loadURL(
+      `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`
+    )
+  } else {
+    mainWindow.loadURL(
+      url.format({
+        pathname: path.resolve('index.html'),
+        protocol: 'file',
+        slashes: true
+      })
+    )
   }
-
-  mainWindow.loadURL(
-    url.format({
-      pathname: path.resolve('index.html'),
-      protocol: 'file',
-      slashes: true
-    })
-  )
 
   mainWindow.on('closed', () => {
     mainWindow = null
