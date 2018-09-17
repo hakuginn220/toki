@@ -1,6 +1,6 @@
 # toki
 
-touch .env
+touch static/.env
 
 ```
 TWITTER_CONSUMER_KEY=${TWITTER_CONSUMER_KEY}
