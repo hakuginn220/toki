@@ -1,6 +1,14 @@
-import { IMain } from 'common/main'
-import { remote, shell } from 'electron'
+import Twitter from '@/utils/twitter'
+import { shell } from 'electron'
 import { action, observable } from 'mobx'
+
+const key = localStorage.getItem('TWITTER_CONSUMER_KEY')
+const secret = localStorage.getItem('TWITTER_CONSUMER_SECRET')
+
+const twitter = new Twitter({
+  consumer_key: key ? key : '',
+  consumer_secret: secret ? secret : ''
+})
 
 export default class Auth {
   @observable.deep
@@ -11,7 +19,6 @@ export default class Auth {
 
   @action.bound
   public async openAuthorize() {
-    const { twitter }: IMain = remote.require('./main')
     const token = await twitter.getRequestToken()
     const url = twitter.getAuthorize(token)
     this.token = token
@@ -20,7 +27,6 @@ export default class Auth {
 
   @action.bound
   public async getAccessToken(verifier: string) {
-    const { twitter }: IMain = remote.require('./main')
     const token = await twitter.getAccessToken({
       ...this.token,
       verifier
