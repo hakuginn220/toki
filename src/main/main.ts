@@ -22,7 +22,6 @@ const createWindow = () => {
       `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`
     )
   } else {
-    mainWindow.webContents.openDevTools()
     mainWindow.loadURL(
       url.format({
         pathname: path.join(__dirname, 'index.html'),
