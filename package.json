@@ -9,50 +9,50 @@
   "scripts": {
     "start": "",
     "test": "",
-    "lint": "tslint --project . --fix \"src/**/*.{ts,tsx}\"",
+    "lint": "tslint -p . --fix \"src/**/*.{ts,tsx}\"",
     "fmt": "prettier --write \"src/**/*.{ts,tsx}\"",
     "dev": "electron-webpack dev",
     "compile": "electron-webpack",
     "dist": "yarn compile && electron-builder",
-    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
-    "precommit": "lint-staged"
+    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"
   },
   "dependencies": {
     "dotenv": "^6.0.0",
-    "mobx": "^5.1.1",
+    "mobx": "^5.1.2",
     "mobx-react": "^5.2.8",
     "oauth": "^0.9.15",
-    "react": "^16.5.1",
-    "react-dom": "^16.5.1",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
     "source-map-support": "^0.5.9",
-    "styled-components": "^3.4.6",
-    "upath": "^1.0.5"
+    "styled-components": "^3.4.9"
   },
   "devDependencies": {
     "@types/dotenv": "^4.0.3",
     "@types/oauth": "^0.9.0",
     "@types/react": "^16.4.14",
     "@types/react-dom": "^16.0.7",
-    "electron": "^2.0.9",
+    "electron": "^3.0.0",
     "electron-builder": "^20.28.4",
     "electron-webpack": "^2.3.1",
     "electron-webpack-ts": "^2.1.1",
-    "husky": "^0.14.3",
-    "lint-staged": "^7.2.2",
-    "prettier": "^1.14.2",
+    "husky": "^1.0.0-rc.15",
+    "lint-staged": "^7.3.0",
+    "prettier": "^1.14.3",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
     "tslint-plugin-prettier": "^2.0.0",
     "tslint-react": "^3.6.0",
     "typescript": "^3.0.3",
-    "webpack": "^4.19.0"
+    "webpack": "^4.19.1"
   },
-  "resolutions": {
-    "upath": "^1.0.5"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "tslint --fix",
+      "tslint -p . --fix",
       "prettier --write",
       "git add"
     ]

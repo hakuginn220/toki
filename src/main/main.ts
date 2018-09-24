@@ -6,7 +6,7 @@ global.eval = () => {
   throw new Error('Sorry, this app does not support global.eval().')
 }
 
-let mainWindow: BrowserWindow | null = null
+let mainWindow: BrowserWindow | null
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
@@ -36,7 +36,13 @@ const createWindow = () => {
   })
 }
 
-const isSecondInstance = app.makeSingleInstance(() => {
+const gotTheLock = app.requestSingleInstanceLock()
+
+if (!gotTheLock) {
+  app.quit()
+}
+
+app.on('second-instance', () => {
   if (mainWindow) {
     if (mainWindow.isMinimized()) {
       mainWindow.restore()
@@ -44,10 +50,6 @@ const isSecondInstance = app.makeSingleInstance(() => {
     mainWindow.focus()
   }
 })
-
-if (isSecondInstance) {
-  app.quit()
-}
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
