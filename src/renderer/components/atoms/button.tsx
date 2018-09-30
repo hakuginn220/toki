@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 export interface IButton {
-  children: Node
+  children: JSX.Element
   onClick?: () => void
   onSubmit?: () => void
 }
