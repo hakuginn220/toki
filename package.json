@@ -23,6 +23,7 @@
     "oauth": "^0.9.15",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-router-dom": "^4.3.1",
     "source-map-support": "^0.5.9",
     "styled-components": "^3.4.9"
   },
@@ -31,6 +32,7 @@
     "@types/oauth": "^0.9.0",
     "@types/react": "^16.4.15",
     "@types/react-dom": "^16.0.8",
+    "@types/react-router-dom": "^4.3.1",
     "electron": "^3.0.2",
     "electron-builder": "^20.28.4",
     "electron-webpack": "^2.3.1",

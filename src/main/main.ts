@@ -1,10 +1,6 @@
 import { app, BrowserWindow } from 'electron'
-import * as path from 'path'
-import * as url from 'url'
-
-global.eval = () => {
-  throw new Error('Sorry, this app does not support global.eval().')
-}
+import path from 'path'
+import url from 'url'
 
 let mainWindow: BrowserWindow | null
 
@@ -19,7 +15,12 @@ const createWindow = () => {
   if (process.env.NODE_ENV !== 'production') {
     mainWindow.webContents.openDevTools()
     mainWindow.loadURL(
-      `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`
+      url.format({
+        hostname: 'localhost',
+        port: process.env.ELECTRON_WEBPACK_WDS_PORT,
+        protocol: 'http',
+        slashes: true
+      })
     )
   } else {
     mainWindow.loadURL(

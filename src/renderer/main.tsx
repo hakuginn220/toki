@@ -1,9 +1,13 @@
-import App from '@/app'
+import Home from '@/pages/home'
+import Auth from '@/stores/auth'
 import { config } from 'dotenv'
 import { webFrame } from 'electron'
-import * as path from 'path'
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
+import { configure } from 'mobx'
+import { Provider } from 'mobx-react'
+import path from 'path'
+import React from 'react'
+import { render } from 'react-dom'
+import { HashRouter, Route, Switch } from 'react-router-dom'
 
 declare var __static: string
 
@@ -17,4 +21,22 @@ if (env.parsed) {
   localStorage.setItem('TWITTER_CONSUMER_SECRET', TWITTER_CONSUMER_SECRET)
 }
 
-ReactDOM.render(<App />, document.getElementById('app'))
+configure({ enforceActions: 'observed' })
+
+const stores = {
+  auth: new Auth()
+}
+
+function App() {
+  return (
+    <Provider {...stores}>
+      <HashRouter>
+        <Switch>
+          <Route component={Home} />
+        </Switch>
+      </HashRouter>
+    </Provider>
+  )
+}
+
+render(<App />, document.getElementById('app'))

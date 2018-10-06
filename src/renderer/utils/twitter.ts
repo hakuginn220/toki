@@ -1,5 +1,5 @@
 import { OAuth } from 'oauth'
-import * as url from 'url'
+import url from 'url'
 
 interface IToken {
   oauth_token: string
