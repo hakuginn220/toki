@@ -9,38 +9,30 @@ interface IState {
 
 @observer
 export default class Auth extends Component<{}, IState> {
-  constructor(props: {}) {
-    super(props)
-    this.state = { verifier: '' }
-    this.getAuth = this.getAuth.bind(this)
-    this.changeVerifier = this.changeVerifier.bind(this)
-    this.postAuth = this.postAuth.bind(this)
-  }
+  public state = { verifier: '' }
 
-  public getAuth(event: MouseEvent<HTMLButtonElement>) {
+  public getAuth = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
     accounts.openAuthorize()
   }
 
-  public changeVerifier(event: ChangeEvent<HTMLInputElement>) {
+  public changeVerifier = (event: ChangeEvent<HTMLInputElement>) => {
     this.setState({ verifier: event.target.value })
   }
 
-  public postAuth(event: FormEvent<HTMLFormElement>) {
+  public postAuth = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     accounts.addAccount(this.state.verifier)
   }
 
   public render() {
-    const { getAuth, postAuth } = this
-
     return (
       <>
-        <Button type="button" onClick={getAuth}>
+        <Button type="button" onClick={this.getAuth}>
           Login Account
         </Button>
 
-        <form onSubmit={postAuth}>
+        <form onSubmit={this.postAuth}>
           <InputText
             type="text"
             value={this.state.verifier}
