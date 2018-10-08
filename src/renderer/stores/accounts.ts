@@ -1,6 +1,6 @@
-import Twitter from '@/utils/twitter'
+import Twitter, { IToken } from '@/utils/twitter'
 import { shell } from 'electron'
-import { action, observable } from 'mobx'
+import { action, computed, observable } from 'mobx'
 
 const key = localStorage.getItem('TWITTER_CONSUMER_KEY')
 const secret = localStorage.getItem('TWITTER_CONSUMER_SECRET')
@@ -10,12 +10,20 @@ const twitter = new Twitter({
   consumer_secret: secret ? secret : ''
 })
 
-export default class Auth {
+class Accounts {
   @observable.deep
   public users: any[] = []
 
   @observable.deep
-  public token: any
+  public token: IToken = {
+    oauth_token: '',
+    oauth_token_secret: ''
+  }
+
+  @computed
+  get is_users() {
+    return this.users.length > 0
+  }
 
   @action.bound
   public async openAuthorize() {
@@ -26,11 +34,24 @@ export default class Auth {
   }
 
   @action.bound
-  public async getAccessToken(verifier: string) {
+  public async addAccount(verifier: string) {
     const token = await twitter.getAccessToken({
       ...this.token,
       verifier
     })
+
     this.users.push(token)
+
+    this.token = {
+      oauth_token: '',
+      oauth_token_secret: ''
+    }
+  }
+
+  @action.bound
+  public async removeAccount(index: number) {
+    this.users.splice(index, 1)
   }
 }
+
+export default new Accounts()

@@ -12,10 +12,11 @@ export interface ITweet {
 export default function Tweet(props: ITweet) {
   return (
     <div>
-      <img src={props.user.profile_image_url_https} alt={props.user.name} />
+      <img src={props.user.profile_image_url_https} />
       <p>
         {props.user.name} @{props.user.screen_name}
       </p>
+      <p>{props.text}</p>
     </div>
   )
 }

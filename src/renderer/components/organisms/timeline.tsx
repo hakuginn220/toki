@@ -1,15 +1,14 @@
-import Tweet, { ITweet } from '@/components/molecules/tweet'
+import Tweet from '@/components/molecules/tweet'
+import { createTweet } from '@/utils/test'
 import React from 'react'
 import styled from 'styled-components'
 
-export interface ITimeline {
-  tweets: ITweet[]
-}
+export default function Timeline() {
+  const tweets = [createTweet(), createTweet(), createTweet()]
 
-export default function Timeline(props: ITimeline) {
   return (
     <Group>
-      {props.tweets.map((tweet, index) => (
+      {tweets.map((tweet, index) => (
         <Item key={index.toString()}>
           <Tweet {...tweet} />
         </Item>

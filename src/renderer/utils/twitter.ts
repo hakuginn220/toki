@@ -1,12 +1,12 @@
 import { OAuth } from 'oauth'
 import url from 'url'
 
-interface IToken {
+export interface IToken {
   oauth_token: string
   oauth_token_secret: string
 }
 
-interface IAccessToken {
+export interface IAccessToken {
   access_token: string
   access_token_secret: string
 }

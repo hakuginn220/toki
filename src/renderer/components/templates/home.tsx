@@ -1,10 +1,6 @@
-import Timeline, { ITimeline } from '@/components/organisms/timeline'
+import Auth from '@/components/organisms/auth'
 import React from 'react'
 
-export interface IHome {
-  timeline: ITimeline
-}
-
-export default function Home(props: IHome) {
-  return <Timeline {...props.timeline} />
+export default function Home() {
+  return <Auth />
 }
