@@ -1,24 +1,12 @@
-import Twitter, { IToken } from '@/utils/twitter'
-import { shell } from 'electron'
+import Twitter from '@/twitter'
+import { remote, shell } from 'electron'
 import { action, computed, observable } from 'mobx'
 
-const key = localStorage.getItem('TWITTER_CONSUMER_KEY')
-const secret = localStorage.getItem('TWITTER_CONSUMER_SECRET')
-
-const twitter = new Twitter({
-  consumer_key: key ? key : '',
-  consumer_secret: secret ? secret : ''
-})
+const twitter: Twitter = remote.getGlobal('twitter')
 
 class Accounts {
   @observable.deep
   public users: any[] = []
-
-  @observable.deep
-  public token: IToken = {
-    oauth_token: '',
-    oauth_token_secret: ''
-  }
 
   @computed
   get is_users() {
@@ -27,25 +15,14 @@ class Accounts {
 
   @action.bound
   public async openAuthorize() {
-    const token = await twitter.getRequestToken()
-    const url = twitter.getAuthorize(token)
-    this.token = token
+    const url = await twitter.getAuthorizeURL()
     shell.openExternal(url)
   }
 
   @action.bound
   public async addAccount(verifier: string) {
-    const token = await twitter.getAccessToken({
-      ...this.token,
-      verifier
-    })
-
+    const token = await twitter.getAccessToken(verifier)
     this.users.push(token)
-
-    this.token = {
-      oauth_token: '',
-      oauth_token_secret: ''
-    }
   }
 
   @action.bound
