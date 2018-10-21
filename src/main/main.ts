@@ -4,9 +4,10 @@ import { app, BrowserWindow } from 'electron'
 import path from 'path'
 import url from 'url'
 
+declare var __static: string
 declare var global: { twitter: Twitter }
 
-const env = config({ path: path.join('static', '.env') })
+const env = config({ path: path.join(__static, '.env') })
 
 global.twitter = new Twitter({
   consumer_key: env.parsed ? env.parsed.TWITTER_CONSUMER_KEY : '',
