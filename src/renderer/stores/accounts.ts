@@ -1,8 +1,17 @@
-import Twitter from '@/twitter'
-import { remote, shell } from 'electron'
+import Twitter from '@/utils/twitter'
+import { config } from 'dotenv'
+import { shell } from 'electron'
 import { action, computed, observable } from 'mobx'
+import path from 'path'
 
-const twitter: Twitter = remote.getGlobal('twitter')
+declare var __static: string
+
+const env = config({ path: path.join(__static, '.env') })
+
+const twitter = new Twitter({
+  consumer_key: env.parsed ? env.parsed.TWITTER_CONSUMER_KEY : '',
+  consumer_secret: env.parsed ? env.parsed.TWITTER_CONSUMER_SECRET : ''
+})
 
 class Accounts {
   @observable.deep

@@ -1,11 +1,6 @@
 import { OAuth } from 'oauth'
 import url from 'url'
 
-interface ITwitterOptions {
-  consumer_key: string
-  consumer_secret: string
-}
-
 interface ITwitterAccessToken {
   access_token: string
   access_token_secret: string
@@ -18,14 +13,14 @@ export default class Twitter {
   private secret: string = ''
   private client: OAuth
 
-  constructor(options: ITwitterOptions) {
+  constructor(options: { consumer_key: string; consumer_secret: string }) {
     this.client = new OAuth(
       `${this.hostname}/oauth/request_token`,
       `${this.hostname}/oauth/access_token`,
       options.consumer_key,
       options.consumer_secret,
       '1.0A',
-      null,
+      'oob',
       'HMAC-SHA1'
     )
   }

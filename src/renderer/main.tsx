@@ -5,4 +5,4 @@ import { render } from 'react-dom'
 
 webFrame.setVisualZoomLevelLimits(1, 1)
 
-render(<App />, document.body.appendChild(document.createElement('div')))
+render(<App />, document.getElementById('app'))
