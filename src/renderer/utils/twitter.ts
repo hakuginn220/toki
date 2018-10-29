@@ -15,12 +15,12 @@ export default class Twitter {
 
   constructor(options: { consumer_key: string; consumer_secret: string }) {
     this.client = new OAuth(
-      `${this.hostname}/oauth/request_token`,
-      `${this.hostname}/oauth/access_token`,
+      `https://${this.hostname}/oauth/request_token`,
+      `https://${this.hostname}/oauth/access_token`,
       options.consumer_key,
       options.consumer_secret,
       '1.0A',
-      'oob',
+      null,
       'HMAC-SHA1'
     )
   }
