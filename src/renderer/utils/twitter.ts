@@ -1,10 +1,16 @@
+import { config } from 'dotenv'
 import { OAuth } from 'oauth'
+import path from 'path'
 import url from 'url'
+
+declare var __static: string
 
 interface ITwitterAccessToken {
   access_token: string
   access_token_secret: string
 }
+
+config({ path: path.join(__static, '.env') })
 
 export default class Twitter {
   private hostname: string = 'api.twitter.com'
@@ -13,12 +19,14 @@ export default class Twitter {
   private secret: string = ''
   private client: OAuth
 
-  constructor(options: { consumer_key: string; consumer_secret: string }) {
+  constructor() {
+    const { TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET } = process.env
+
     this.client = new OAuth(
       `https://${this.hostname}/oauth/request_token`,
       `https://${this.hostname}/oauth/access_token`,
-      options.consumer_key,
-      options.consumer_secret,
+      TWITTER_CONSUMER_KEY ? TWITTER_CONSUMER_KEY : '',
+      TWITTER_CONSUMER_SECRET ? TWITTER_CONSUMER_SECRET : '',
       '1.0A',
       null,
       'HMAC-SHA1'
