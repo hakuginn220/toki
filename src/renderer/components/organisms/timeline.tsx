@@ -1,5 +1,4 @@
 import Tweet from '@/components/molecules/tweet'
-import { createTweet } from '@/utils/test'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -31,3 +30,18 @@ const Item = styled.li`
     margin: 0;
   }
 `
+
+function createTweet() {
+  const unique = Math.random()
+    .toString(36)
+    .slice(-8)
+
+  return {
+    text: unique,
+    user: {
+      name: unique,
+      profile_image_url_https: 'https://placehold.jp/128x128.png',
+      screen_name: unique
+    }
+  }
+}
