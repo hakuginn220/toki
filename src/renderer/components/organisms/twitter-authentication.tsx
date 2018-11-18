@@ -1,14 +1,13 @@
-import { Button, InputText } from '@/components/atoms/form'
+import Button from '@/components/atoms/button'
+import InputButton from '@/components/molecules/input-button'
 import accounts from '@/stores/accounts'
-import { observer } from 'mobx-react'
 import React, { ChangeEvent, Component, FormEvent, MouseEvent } from 'react'
 
 interface IState {
   verifier: string
 }
 
-@observer
-export default class Auth extends Component<{}, IState> {
+export default class TwitterAuthentication extends Component<{}, IState> {
   public state = { verifier: '' }
 
   public getAuth = (event: MouseEvent<HTMLButtonElement>) => {
@@ -28,18 +27,13 @@ export default class Auth extends Component<{}, IState> {
   public render() {
     return (
       <>
-        <Button type="button" onClick={this.getAuth}>
-          Login Account
-        </Button>
+        <Button onClick={this.getAuth}>Login Account</Button>
 
-        <form onSubmit={this.postAuth}>
-          <InputText
-            type="text"
-            value={this.state.verifier}
-            onChange={this.changeVerifier}
-          />
-          <Button type="submit">Add Account</Button>
-        </form>
+        <InputButton
+          value={this.state.verifier}
+          onChange={this.changeVerifier}
+          onSubmit={this.postAuth}
+        />
       </>
     )
   }
