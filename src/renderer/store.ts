@@ -1,6 +1,7 @@
 import accounts from '@/modules/accounts'
-import { combineReducers, createStore } from 'redux'
+import { applyMiddleware, combineReducers, createStore } from 'redux'
+import thunk from 'redux-thunk'
 
 const reducer = combineReducers({ accounts })
 
-export default createStore(reducer)
+export default createStore(reducer, applyMiddleware(thunk))

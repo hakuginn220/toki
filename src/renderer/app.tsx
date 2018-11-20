@@ -1,12 +1,9 @@
 import HomeRoute from '@/pages/home'
-import React, { SFC } from 'react'
+import store from '@/store'
+import React from 'react'
 import { Provider } from 'react-redux'
 import { HashRouter, Route, Switch } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
-
-interface IProps {
-  store: any
-}
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -15,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const App: SFC<IProps> = ({ store }) => (
+const App = () => (
   <>
     <Provider store={store}>
       <HashRouter>
