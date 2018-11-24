@@ -7,7 +7,7 @@ interface ITwitterAccessToken {
   access_token_secret: string
 }
 
-export default class Twitter {
+class Twitter {
   private hostname: string = 'api.twitter.com'
   private version: string = '1.1'
   private token: string = ''
@@ -188,3 +188,5 @@ export default class Twitter {
     })
   }
 }
+
+export default new Twitter()

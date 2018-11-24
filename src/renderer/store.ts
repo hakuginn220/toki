@@ -1,7 +1,7 @@
 import accounts from '@/modules/accounts'
 import { applyMiddleware, combineReducers, createStore } from 'redux'
-import thunk from 'redux-thunk'
+import logger from 'redux-logger'
 
 const reducer = combineReducers({ accounts })
 
-export default createStore(reducer, applyMiddleware(thunk))
+export default createStore(reducer, applyMiddleware(logger))

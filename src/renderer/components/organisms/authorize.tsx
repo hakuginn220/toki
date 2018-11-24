@@ -1,7 +1,7 @@
 import Button from '@/components/atoms/button'
 import React, { MouseEvent, SFC } from 'react'
 
-interface IProps {
+export interface IProps {
   onAuthorize?: (event: MouseEvent<HTMLButtonElement>) => void
 }
 

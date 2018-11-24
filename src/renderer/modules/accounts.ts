@@ -6,14 +6,16 @@ interface IUser {
   access_token_secret: string
 }
 
-interface IState {
+export interface IState {
   users: IUser[]
+  verifier: string
 }
 
 enum ActionTypes {
   OPEN_AUTHORIZE = 'OPEN_AUTHORIZE',
   ADD_ACCOUNT = 'ADD_ACCOUNT',
-  REMOVE_ACCOUNT = 'REMOVE_ACCOUNT'
+  REMOVE_ACCOUNT = 'REMOVE_ACCOUNT',
+  CHANGE_VERIFIER = 'CHANGE_VERIFIER'
 }
 
 interface IOpenAuthorize extends Action<ActionTypes.OPEN_AUTHORIZE> {}
@@ -42,13 +44,23 @@ export const removeAccount: ActionCreator<IRemoveAccount> = payload => ({
   type: ActionTypes.REMOVE_ACCOUNT
 })
 
+interface IChangeVerifier extends Action<ActionTypes.CHANGE_VERIFIER> {
+  payload: { verifier: string }
+}
+
+export const changeVerifier: ActionCreator<IChangeVerifier> = payload => ({
+  payload,
+  type: ActionTypes.CHANGE_VERIFIER
+})
+
 const initialState: IState = {
-  users: []
+  users: [],
+  verifier: ''
 }
 
 const reducer: Reducer<
   IState,
-  IOpenAuthorize | IAddAccount | IRemoveAccount
+  IOpenAuthorize | IAddAccount | IRemoveAccount | IChangeVerifier
 > = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
@@ -61,6 +73,10 @@ const reducer: Reducer<
 
       case ActionTypes.REMOVE_ACCOUNT:
         draft.users.splice(action.payload.index, 1)
+        break
+
+      case ActionTypes.CHANGE_VERIFIER:
+        draft.verifier = action.payload.verifier
         break
 
       default:

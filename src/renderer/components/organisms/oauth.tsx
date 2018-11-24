@@ -1,7 +1,7 @@
 import InputButton from '@/components/molecules/input-button'
 import React, { ChangeEvent, FormEvent, SFC } from 'react'
 
-interface IProps {
+export interface IProps {
   verifier: string
   onChangeVerifier?: (event: ChangeEvent<HTMLInputElement>) => void
   onOAuth?: (event: FormEvent<HTMLFormElement>) => void
