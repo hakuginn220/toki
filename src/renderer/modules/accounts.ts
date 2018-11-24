@@ -1,13 +1,9 @@
+import { ITwitterAccessToken } from '@/utils/twitter'
 import produce from 'immer'
 import { Action, ActionCreator, Reducer } from 'redux'
 
-interface IUser {
-  access_token: string
-  access_token_secret: string
-}
-
 export interface IState {
-  users: IUser[]
+  users: ITwitterAccessToken[]
   verifier: string
 }
 
@@ -25,11 +21,11 @@ export const openAuthorize: ActionCreator<IOpenAuthorize> = () => ({
 })
 
 interface IAddAccount extends Action<ActionTypes.ADD_ACCOUNT> {
-  payload: { user: IUser }
+  payload: { user: ITwitterAccessToken }
 }
 
 export const addAccount: ActionCreator<IAddAccount> = (payload: {
-  user: IUser
+  user: ITwitterAccessToken
 }) => ({
   payload,
   type: ActionTypes.ADD_ACCOUNT

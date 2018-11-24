@@ -2,7 +2,7 @@ import { TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET } from '@/utils/dotenv'
 import { OAuth } from 'oauth'
 import url from 'url'
 
-interface ITwitterAccessToken {
+export interface ITwitterAccessToken {
   access_token: string
   access_token_secret: string
 }

@@ -1,16 +1,15 @@
 import Authorize, { IProps } from '@/components/organisms/authorize'
-import { IState, openAuthorize } from '@/modules/accounts'
+import { openAuthorize } from '@/modules/accounts'
 import twitter from '@/utils/twitter'
 import { shell } from 'electron'
-import { MouseEvent } from 'react'
-import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux'
+import { connect, MapDispatchToProps } from 'react-redux'
 
-const mapStateToProps: MapStateToProps<{}, IProps, IState> = () => ({})
+interface IDispatchProps {
+  onAuthorize: IProps['onAuthorize']
+}
 
 const mapDispatchToProps: MapDispatchToProps<
-  {
-    onAuthorize: (event: MouseEvent<HTMLButtonElement>) => void
-  },
+  IDispatchProps,
   IProps
 > = dispatch => ({
   onAuthorize() {
@@ -22,6 +21,6 @@ const mapDispatchToProps: MapDispatchToProps<
 })
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(Authorize)
