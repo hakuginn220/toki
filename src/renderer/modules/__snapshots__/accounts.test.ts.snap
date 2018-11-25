@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ADD_ACCOUNT 1`] = `
+Object {
+  "users": Array [
+    Object {
+      "access_token": "token code for No.1",
+      "access_token_secret": "secret code for No.1",
+    },
+  ],
+  "verifier": "",
+}
+`;
+
+exports[`CHANGE_VERIFIER 1`] = `
+Object {
+  "users": Array [],
+  "verifier": "authentication code",
+}
+`;
+
+exports[`OPEN_AUTHORIZE 1`] = `
+Object {
+  "users": Array [],
+  "verifier": "",
+}
+`;
+
+exports[`REMOVE_ACCOUNT 1`] = `
+Object {
+  "users": Array [
+    Object {
+      "access_token": "token code for No.2",
+      "access_token_secret": "secret code for No.2",
+    },
+    Object {
+      "access_token": "token code for No.4",
+      "access_token_secret": "secret code for No.4",
+    },
+  ],
+  "verifier": "",
+}
+`;

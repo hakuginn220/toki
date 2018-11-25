@@ -7,7 +7,7 @@ export interface IState {
   verifier: string
 }
 
-enum ActionTypes {
+export enum ActionTypes {
   OPEN_AUTHORIZE = 'OPEN_AUTHORIZE',
   ADD_ACCOUNT = 'ADD_ACCOUNT',
   REMOVE_ACCOUNT = 'REMOVE_ACCOUNT',
@@ -49,7 +49,7 @@ export const changeVerifier: ActionCreator<IChangeVerifier> = payload => ({
   type: ActionTypes.CHANGE_VERIFIER
 })
 
-const initialState: IState = {
+export const initialState: IState = {
   users: [],
   verifier: ''
 }
