@@ -2,11 +2,6 @@ import { ITwitterAccessToken } from '@/utils/twitter'
 import produce from 'immer'
 import { Action, ActionCreator, Reducer } from 'redux'
 
-export interface IState {
-  users: ITwitterAccessToken[]
-  verifier: string
-}
-
 export enum ActionTypes {
   OPEN_AUTHORIZE = 'OPEN_AUTHORIZE',
   ADD_ACCOUNT = 'ADD_ACCOUNT',
@@ -48,6 +43,11 @@ export const changeVerifier: ActionCreator<IChangeVerifier> = payload => ({
   payload,
   type: ActionTypes.CHANGE_VERIFIER
 })
+
+export interface IState {
+  users: ITwitterAccessToken[]
+  verifier: string
+}
 
 export const initialState: IState = {
   users: [],
