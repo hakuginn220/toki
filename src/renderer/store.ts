@@ -1,7 +1,11 @@
-import accounts from '@/modules/accounts'
-import { applyMiddleware, combineReducers, createStore } from 'redux'
+import accounts, { IState as IStateAccounts } from '@/modules/accounts'
+import { applyMiddleware, combineReducers, createStore, Reducer } from 'redux'
 import logger from 'redux-logger'
 
-const reducer = combineReducers({ accounts })
+export interface IRootState {
+  accounts: IStateAccounts
+}
+
+const reducer: Reducer<IRootState> = combineReducers({ accounts })
 
 export default createStore(reducer, applyMiddleware(logger))

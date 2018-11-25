@@ -1,5 +1,6 @@
 import OAuth, { IProps } from '@/components/organisms/oauth'
-import { addAccount, changeVerifier, IState } from '@/modules/accounts'
+import { addAccount, changeVerifier } from '@/modules/accounts'
+import { IRootState } from '@/store'
 import twitter from '@/utils/twitter'
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux'
 
@@ -10,7 +11,7 @@ interface IStateProps {
 const mapStateToProps: MapStateToProps<
   IStateProps,
   IProps,
-  { accounts: IState }
+  IRootState
 > = state => ({
   verifier: state.accounts.verifier
 })

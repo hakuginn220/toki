@@ -63,7 +63,6 @@
   "lint-staged": {
     "*.{ts,tsx}": [
       "tslint -p . --fix",
-      "jest --ci",
       "prettier --write",
       "git add"
     ]
