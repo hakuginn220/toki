@@ -1,11 +1,27 @@
-import TwitterAuthorize from '@/containers/twitter-authorize'
-import TwitterOAuth from '@/containers/twitter-oauth'
-import React, { SFC } from 'react'
+import Authorize from '@/components/organisms/authorize'
+import OAuth from '@/components/organisms/oauth'
+import React, { ChangeEvent, FormEvent, MouseEvent, SFC } from 'react'
 
-const Home: SFC<{}> = () => (
+export interface IProps {
+  verifier: string
+  onChangeVerifier?: (event: ChangeEvent<HTMLInputElement>) => void
+  onOAuth?: (event: FormEvent<HTMLFormElement>) => void
+  onAuthorize?: (event: MouseEvent<HTMLButtonElement>) => void
+}
+
+const Home: SFC<IProps> = ({
+  verifier,
+  onChangeVerifier,
+  onOAuth,
+  onAuthorize
+}) => (
   <>
-    <TwitterAuthorize />
-    <TwitterOAuth verifier="" />
+    <Authorize onAuthorize={onAuthorize} />
+    <OAuth
+      verifier={verifier}
+      onChangeVerifier={onChangeVerifier}
+      onOAuth={onOAuth}
+    />
   </>
 )
 

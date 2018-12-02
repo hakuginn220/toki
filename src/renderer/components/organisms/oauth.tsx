@@ -7,7 +7,7 @@ export interface IProps {
   onOAuth?: (event: FormEvent<HTMLFormElement>) => void
 }
 
-const OAuth: SFC<IProps> = ({ verifier = '', onChangeVerifier, onOAuth }) => (
+const OAuth: SFC<IProps> = ({ verifier, onChangeVerifier, onOAuth }) => (
   <InputButton
     value={verifier}
     onChange={onChangeVerifier}

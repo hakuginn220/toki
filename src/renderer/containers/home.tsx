@@ -1,7 +1,8 @@
-import OAuth, { IProps } from '@/components/organisms/oauth'
-import { addAccount, changeVerifier } from '@/modules/accounts'
+import Home, { IProps } from '@/components/templates/home'
+import { addAccount, changeVerifier, openAuthorize } from '@/modules/accounts'
 import { IRootState } from '@/store'
 import twitter from '@/utils/twitter'
+import { shell } from 'electron'
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux'
 
 interface IStateProps {
@@ -19,6 +20,7 @@ const mapStateToProps: MapStateToProps<
 interface IDispatchProps {
   onChangeVerifier: IProps['onChangeVerifier']
   onOAuth: IProps['onOAuth']
+  onAuthorize: IProps['onAuthorize']
 }
 
 const mapDispatchToProps: MapDispatchToProps<IDispatchProps, IProps> = (
@@ -27,12 +29,18 @@ const mapDispatchToProps: MapDispatchToProps<IDispatchProps, IProps> = (
 ) => ({
   onChangeVerifier(event) {
     event.preventDefault()
-    dispatch(changeVerifier(event.target.value))
+    dispatch(changeVerifier({ verifier: event.target.value }))
   },
   onOAuth(event) {
     event.preventDefault()
     twitter.getAccessToken(state.verifier).then(token => {
-      dispatch(addAccount(token))
+      dispatch(addAccount({ user: token }))
+    })
+  },
+  onAuthorize() {
+    twitter.getAuthorizeURL().then(url => {
+      shell.openExternal(url)
+      dispatch(openAuthorize())
     })
   }
 })
@@ -40,4 +48,4 @@ const mapDispatchToProps: MapDispatchToProps<IDispatchProps, IProps> = (
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(OAuth)
+)(Home)

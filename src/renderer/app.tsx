@@ -1,9 +1,12 @@
-import HomeRoute from '@/pages/home'
-import store from '@/store'
+import Home from '@/containers/home'
+import createStore from '@/store'
 import React from 'react'
 import { Provider } from 'react-redux'
 import { HashRouter, Route, Switch } from 'react-router-dom'
+import { PersistGate } from 'redux-persist/integration/react'
 import { createGlobalStyle } from 'styled-components'
+
+const { store, persistor } = createStore()
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -15,11 +18,13 @@ const GlobalStyle = createGlobalStyle`
 const App = () => (
   <>
     <Provider store={store}>
-      <HashRouter>
-        <Switch>
-          <Route component={HomeRoute} />
-        </Switch>
-      </HashRouter>
+      <PersistGate loading={null} persistor={persistor}>
+        <HashRouter>
+          <Switch>
+            <Route component={Home} />
+          </Switch>
+        </HashRouter>
+      </PersistGate>
     </Provider>
     <GlobalStyle />
   </>

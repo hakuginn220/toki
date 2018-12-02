@@ -8,7 +8,7 @@ interface IProps {
   onSubmit?: (event: FormEvent<HTMLFormElement>) => void
 }
 
-const InputButton: SFC<IProps> = ({ value = '', onChange, onSubmit }) => (
+const InputButton: SFC<IProps> = ({ value, onChange, onSubmit }) => (
   <form onSubmit={onSubmit}>
     <Input type="text" value={value} onChange={onChange} />
     <Button type="submit">Add Account</Button>
