@@ -30,7 +30,9 @@ interface IRemoveAccount extends Action<ActionTypes.REMOVE_ACCOUNT> {
   payload: { index: number }
 }
 
-export const removeAccount: ActionCreator<IRemoveAccount> = payload => ({
+export const removeAccount: ActionCreator<IRemoveAccount> = (payload: {
+  index: number
+}) => ({
   payload,
   type: ActionTypes.REMOVE_ACCOUNT
 })
@@ -39,7 +41,9 @@ interface IChangeVerifier extends Action<ActionTypes.CHANGE_VERIFIER> {
   payload: { verifier: string }
 }
 
-export const changeVerifier: ActionCreator<IChangeVerifier> = payload => ({
+export const changeVerifier: ActionCreator<IChangeVerifier> = (payload: {
+  verifier: string
+}) => ({
   payload,
   type: ActionTypes.CHANGE_VERIFIER
 })
