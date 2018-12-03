@@ -1,4 +1,5 @@
 import Home from '@/containers/home'
+import Login from '@/containers/login'
 import createStore from '@/store'
 import React from 'react'
 import { Provider } from 'react-redux'
@@ -21,7 +22,8 @@ const App = () => (
       <PersistGate loading={null} persistor={persistor}>
         <HashRouter>
           <Switch>
-            <Route component={Home} />
+            <Route path="/" exact={true} component={Home} />
+            <Route path="/login" component={Login} />
           </Switch>
         </HashRouter>
       </PersistGate>
