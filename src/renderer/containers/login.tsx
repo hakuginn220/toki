@@ -4,6 +4,7 @@ import { IRootState } from '@/store'
 import twitter from '@/utils/twitter'
 import { shell } from 'electron'
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux'
+import { RouteComponentProps } from 'react-router-dom'
 
 interface IStateProps {
   verifier: IProps['verifier']
@@ -11,7 +12,7 @@ interface IStateProps {
 
 const mapStateToProps: MapStateToProps<
   IStateProps,
-  IProps,
+  RouteComponentProps,
   IRootState
 > = state => ({
   verifier: state.accounts.verifier
@@ -23,17 +24,16 @@ interface IDispatchProps {
   onAuthorize: IProps['onAuthorize']
 }
 
-const mapDispatchToProps: MapDispatchToProps<IDispatchProps, IProps> = (
-  dispatch,
-  state
-) => ({
+const mapDispatchToProps: MapDispatchToProps<
+  IDispatchProps,
+  RouteComponentProps
+> = dispatch => ({
   onChangeVerifier(event) {
-    event.preventDefault()
     dispatch(changeVerifier({ verifier: event.target.value }))
   },
   onOAuth(event) {
     event.preventDefault()
-    twitter.getAccessToken(state.verifier).then(token => {
+    twitter.getAccessToken('').then(token => {
       dispatch(addAccount({ user: token }))
     })
   },
