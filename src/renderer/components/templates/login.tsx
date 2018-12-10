@@ -1,20 +1,22 @@
+import Button from '@/components/atoms/button'
 import Authorize from '@/components/organisms/authorize'
 import OAuth from '@/components/organisms/oauth'
 import React, { ChangeEvent, FormEvent, MouseEvent, SFC } from 'react'
-import { Link } from 'react-router-dom'
 
 export interface IProps {
   verifier: string
   onChangeVerifier?: (event: ChangeEvent<HTMLInputElement>) => void
   onOAuth?: (event: FormEvent<HTMLFormElement>) => void
   onAuthorize?: (event: MouseEvent<HTMLButtonElement>) => void
+  onMoveHome?: (event: MouseEvent<HTMLButtonElement>) => void
 }
 
 const Login: SFC<IProps> = ({
   verifier,
   onChangeVerifier,
   onOAuth,
-  onAuthorize
+  onAuthorize,
+  onMoveHome
 }) => (
   <>
     <Authorize onAuthorize={onAuthorize} />
@@ -23,7 +25,7 @@ const Login: SFC<IProps> = ({
       onChangeVerifier={onChangeVerifier}
       onOAuth={onOAuth}
     />
-    <Link to="/">Go Home</Link>
+    <Button onClick={onMoveHome}>Go Home</Button>
   </>
 )
 

@@ -3,10 +3,10 @@ import produce from 'immer'
 import { Action, ActionCreator, Reducer } from 'redux'
 
 export enum ActionTypes {
-  OPEN_AUTHORIZE = 'OPEN_AUTHORIZE',
-  ADD_ACCOUNT = 'ADD_ACCOUNT',
-  REMOVE_ACCOUNT = 'REMOVE_ACCOUNT',
-  CHANGE_VERIFIER = 'CHANGE_VERIFIER'
+  OPEN_AUTHORIZE = 'accounts/OPEN_AUTHORIZE',
+  ADD_ACCOUNT = 'accounts/ADD_ACCOUNT',
+  REMOVE_ACCOUNT = 'accounts/REMOVE_ACCOUNT',
+  CHANGE_VERIFIER = 'accounts/CHANGE_VERIFIER'
 }
 
 interface IOpenAuthorize extends Action<ActionTypes.OPEN_AUTHORIZE> {}

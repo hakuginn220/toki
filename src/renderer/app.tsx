@@ -17,19 +17,17 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const App = () => (
-  <>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <HashRouter>
-          <Switch>
-            <Route path="/" exact={true} component={Home} />
-            <Route path="/login" component={Login} />
-          </Switch>
-        </HashRouter>
-      </PersistGate>
-    </Provider>
+  <Provider store={store}>
     <GlobalStyle />
-  </>
+    <PersistGate loading={null} persistor={persistor}>
+      <HashRouter>
+        <Switch>
+          <Route path="/" exact={true} component={Home} />
+          <Route path="/login" component={Login} />
+        </Switch>
+      </HashRouter>
+    </PersistGate>
+  </Provider>
 )
 
 export default App

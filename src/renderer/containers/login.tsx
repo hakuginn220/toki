@@ -1,5 +1,6 @@
 import Login, { IProps } from '@/components/templates/login'
 import { addAccount, changeVerifier, openAuthorize } from '@/modules/accounts'
+import { changeLocation } from '@/modules/routes'
 import { IRootState } from '@/store'
 import twitter from '@/utils/twitter'
 import { shell } from 'electron'
@@ -22,12 +23,13 @@ interface IDispatchProps {
   onChangeVerifier: IProps['onChangeVerifier']
   onOAuth: IProps['onOAuth']
   onAuthorize: IProps['onAuthorize']
+  onMoveHome: IProps['onMoveHome']
 }
 
 const mapDispatchToProps: MapDispatchToProps<
   IDispatchProps,
   RouteComponentProps
-> = dispatch => ({
+> = (dispatch, props) => ({
   onChangeVerifier(event) {
     dispatch(changeVerifier({ verifier: event.target.value }))
   },
@@ -42,6 +44,10 @@ const mapDispatchToProps: MapDispatchToProps<
       shell.openExternal(url)
       dispatch(openAuthorize())
     })
+  },
+  onMoveHome() {
+    dispatch(changeLocation({ location: 'home' }))
+    props.history.push('/')
   }
 })
 

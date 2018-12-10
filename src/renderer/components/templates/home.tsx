@@ -1,9 +1,13 @@
-import React, { SFC } from 'react'
-import { Link } from 'react-router-dom'
+import Button from '@/components/atoms/button'
+import React, { MouseEvent, SFC } from 'react'
 
-const Home: SFC<{}> = () => (
+export interface IProps {
+  onMoveLogin?: (event: MouseEvent<HTMLButtonElement>) => void
+}
+
+const Home: SFC<IProps> = ({ onMoveLogin }) => (
   <>
-    <Link to="/login">Go Login</Link>
+    <Button onClick={onMoveLogin}>Go Login</Button>
   </>
 )
 
