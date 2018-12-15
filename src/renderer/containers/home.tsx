@@ -12,8 +12,9 @@ const mapDispatchToProps: MapDispatchToProps<
   RouteComponentProps
 > = (dispatch, props) => ({
   onMoveLogin() {
-    dispatch(changeLocation({ location: 'login' }))
-    props.history.push('/login')
+    const location = '/login'
+    dispatch(changeLocation(location))
+    props.history.push(location)
   }
 })
 

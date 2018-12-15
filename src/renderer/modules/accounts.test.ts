@@ -11,23 +11,6 @@ const createUser = () => {
   }
 }
 
-test('OPEN_AUTHORIZE', () => {
-  expect(
-    reducer(initialState, {
-      type: ActionTypes.OPEN_AUTHORIZE
-    })
-  ).toMatchSnapshot()
-})
-
-test('CHANGE_VERIFIER', () => {
-  expect(
-    reducer(initialState, {
-      payload: { verifier: 'authentication code' },
-      type: ActionTypes.CHANGE_VERIFIER
-    })
-  ).toMatchSnapshot()
-})
-
 test('ADD_ACCOUNT', () => {
   expect(
     reducer(initialState, {
@@ -51,6 +34,15 @@ test('REMOVE_ACCOUNT', () => {
     reducer(state, {
       payload: { index: 1 },
       type: ActionTypes.REMOVE_ACCOUNT
+    })
+  ).toMatchSnapshot()
+})
+
+test('CHANGE_VERIFIER', () => {
+  expect(
+    reducer(initialState, {
+      payload: { verifier: 'authentication code' },
+      type: ActionTypes.CHANGE_VERIFIER
     })
   ).toMatchSnapshot()
 })

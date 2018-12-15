@@ -19,13 +19,6 @@ Object {
 }
 `;
 
-exports[`OPEN_AUTHORIZE 1`] = `
-Object {
-  "users": Array [],
-  "verifier": "",
-}
-`;
-
 exports[`REMOVE_ACCOUNT 1`] = `
 Object {
   "users": Array [

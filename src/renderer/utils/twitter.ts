@@ -7,68 +7,66 @@ export interface ITwitterAccessToken {
   access_token_secret: string
 }
 
-class Twitter {
-  private hostname: string = 'api.twitter.com'
-  private version: string = '1.1'
-  private token: string = ''
-  private secret: string = ''
-  private client: OAuth
+const hostname = 'api.twitter.com'
+const version = '1.1'
 
-  constructor() {
-    this.client = new OAuth(
-      `https://${this.hostname}/oauth/request_token`,
-      `https://${this.hostname}/oauth/access_token`,
-      TWITTER_CONSUMER_KEY ? TWITTER_CONSUMER_KEY : '',
-      TWITTER_CONSUMER_SECRET ? TWITTER_CONSUMER_SECRET : '',
-      '1.0A',
-      null,
-      'HMAC-SHA1'
-    )
-  }
+let token: string = ''
+let secret: string = ''
 
-  public getAuthorizeURL(): Promise<string> {
+const client = new OAuth(
+  `https://${hostname}/oauth/request_token`,
+  `https://${hostname}/oauth/access_token`,
+  TWITTER_CONSUMER_KEY ? TWITTER_CONSUMER_KEY : '',
+  TWITTER_CONSUMER_SECRET ? TWITTER_CONSUMER_SECRET : '',
+  '1.0A',
+  null,
+  'HMAC-SHA1'
+)
+
+export default {
+  getAuthorizeURL(): Promise<string> {
     return new Promise((resolve, reject) => {
-      this.client.getOAuthRequestToken((err, oauthToken, oauthTokenSecret) => {
+      client.getOAuthRequestToken((err, oauthToken, oauthTokenSecret) => {
         if (err) {
           return reject(err)
         }
 
-        this.token = oauthToken
-        this.secret = oauthTokenSecret
+        token = oauthToken
+        secret = oauthTokenSecret
 
         const endpoint = url.format({
-          hostname: this.hostname,
+          hostname,
           pathname: 'oauth/authorize',
           protocol: 'https',
-          query: { oauth_token: this.token }
+          query: { oauth_token: token }
         })
 
         resolve(endpoint)
       })
     })
-  }
+  },
 
-  public getAccessToken(verifier: string): Promise<ITwitterAccessToken> {
+  getAccessToken(verifier: string): Promise<ITwitterAccessToken> {
     return new Promise((resolve, reject) => {
-      if (this.token === '') {
+      if (token === '') {
         reject(new Error('OAuth request token not found.'))
       }
 
-      if (this.secret === '') {
+      if (secret === '') {
         reject(new Error('OAuth request token secret not found.'))
       }
 
-      this.client.getOAuthAccessToken(
-        this.token,
-        this.secret,
+      client.getOAuthAccessToken(
+        token,
+        secret,
         verifier,
         (err, accessToken, accessTokenSecret) => {
           if (err) {
             return reject(err)
           }
 
-          this.token = ''
-          this.secret = ''
+          token = ''
+          secret = ''
 
           resolve({
             access_token: accessToken,
@@ -77,25 +75,25 @@ class Twitter {
         }
       )
     })
-  }
+  },
 
-  public get(
-    token: ITwitterAccessToken,
+  get(
+    twitter: ITwitterAccessToken,
     resource: string,
     query: object
   ): Promise<any> {
     return new Promise((resolve, reject) => {
       const endpoint = url.format({
-        hostname: this.hostname,
-        pathname: `${this.version}/${resource}.json`,
+        hostname,
+        pathname: `${version}/${resource}.json`,
         protocol: 'https',
         query
       })
 
-      this.client.get(
+      client.get(
         endpoint,
-        token.access_token,
-        token.access_token_secret,
+        twitter.access_token,
+        twitter.access_token_secret,
         (err, data) => {
           if (err) {
             return reject(err)
@@ -105,24 +103,24 @@ class Twitter {
         }
       )
     })
-  }
+  },
 
-  public post(
-    token: ITwitterAccessToken,
+  post(
+    twitter: ITwitterAccessToken,
     resource: string,
     body: object
   ): Promise<any> {
     return new Promise((resolve, reject) => {
       const endpoint = url.format({
-        hostname: this.hostname,
-        pathname: `${this.version}/${resource}.json`,
+        hostname,
+        pathname: `${version}/${resource}.json`,
         protocol: 'https'
       })
 
-      this.client.post(
+      client.post(
         endpoint,
-        token.access_token,
-        token.access_token_secret,
+        twitter.access_token,
+        twitter.access_token_secret,
         body,
         undefined,
         (err, data) => {
@@ -134,24 +132,24 @@ class Twitter {
         }
       )
     })
-  }
+  },
 
-  public put(
-    token: ITwitterAccessToken,
+  put(
+    twitter: ITwitterAccessToken,
     resource: string,
     body: object
   ): Promise<any> {
     return new Promise((resolve, reject) => {
       const endpoint = url.format({
-        hostname: this.hostname,
-        pathname: `${this.version}/${resource}.json`,
+        hostname,
+        pathname: `${version}/${resource}.json`,
         protocol: 'https'
       })
 
-      this.client.put(
+      client.put(
         endpoint,
-        token.access_token,
-        token.access_token_secret,
+        twitter.access_token,
+        twitter.access_token_secret,
         body,
         undefined,
         (err, data) => {
@@ -163,20 +161,20 @@ class Twitter {
         }
       )
     })
-  }
+  },
 
-  public delete(token: ITwitterAccessToken, resource: string): Promise<any> {
+  delete(twitter: ITwitterAccessToken, resource: string): Promise<any> {
     return new Promise((resolve, reject) => {
       const endpoint = url.format({
-        hostname: this.hostname,
-        pathname: `${this.version}/${resource}.json`,
+        hostname,
+        pathname: `${version}/${resource}.json`,
         protocol: 'https'
       })
 
-      this.client.delete(
+      client.delete(
         endpoint,
-        token.access_token,
-        token.access_token_secret,
+        twitter.access_token,
+        twitter.access_token_secret,
         (err, data) => {
           if (err) {
             return reject(err)
@@ -188,5 +186,3 @@ class Twitter {
     })
   }
 }
-
-export default new Twitter()

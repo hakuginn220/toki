@@ -1,9 +1,7 @@
 import Login, { IProps } from '@/components/templates/login'
-import { addAccount, changeVerifier, openAuthorize } from '@/modules/accounts'
+import { changeVerifier, getAuthorize, getOAuth } from '@/modules/accounts'
 import { changeLocation } from '@/modules/routes'
 import { IRootState } from '@/store'
-import twitter from '@/utils/twitter'
-import { shell } from 'electron'
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux'
 import { RouteComponentProps } from 'react-router-dom'
 
@@ -31,23 +29,20 @@ const mapDispatchToProps: MapDispatchToProps<
   RouteComponentProps
 > = (dispatch, props) => ({
   onChangeVerifier(event) {
-    dispatch(changeVerifier({ verifier: event.target.value }))
+    const verifier = event.target.value
+    dispatch(changeVerifier(verifier))
   },
   onOAuth(event) {
     event.preventDefault()
-    twitter.getAccessToken('').then(token => {
-      dispatch(addAccount({ user: token }))
-    })
+    dispatch(getOAuth())
   },
   onAuthorize() {
-    twitter.getAuthorizeURL().then(url => {
-      shell.openExternal(url)
-      dispatch(openAuthorize())
-    })
+    dispatch(getAuthorize())
   },
   onMoveHome() {
-    dispatch(changeLocation({ location: 'home' }))
-    props.history.push('/')
+    const location = '/'
+    dispatch(changeLocation(location))
+    props.history.push(location)
   }
 })
 
