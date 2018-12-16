@@ -108,6 +108,11 @@ export const initialState: IState = {
 const reducer: Reducer<IState, TActions> = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case ActionTypes.GET_AUTHORIZE_SUCCESS:
+      case ActionTypes.GET_OAUTH_SUCCESS:
+        draft.verifier = ''
+        break
+
       case ActionTypes.ADD_ACCOUNT:
         draft.users.push(action.payload.user)
         break
