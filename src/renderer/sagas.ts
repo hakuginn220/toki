@@ -1,21 +1,17 @@
 import * as accounts from '@/modules/accounts'
+import { IRootState } from '@/store'
 import twitter from '@/utils/twitter'
 import { shell } from 'electron'
 import {
   call,
-  CallEffect,
+  Effect,
   ForkEffect,
   put,
-  PutEffect,
+  select,
   takeLatest
 } from 'redux-saga/effects'
 
-type TGetAuthorize =
-  | CallEffect
-  | PutEffect<accounts.IGetAuthorizeFailure>
-  | PutEffect<accounts.IGetAuthorizeSuccess>
-
-function* getAuthorize(): IterableIterator<TGetAuthorize> {
+function* getAuthorize(): IterableIterator<Effect> {
   try {
     const url = yield call(twitter.getAuthorizeURL)
     shell.openExternal(url)
@@ -25,13 +21,12 @@ function* getAuthorize(): IterableIterator<TGetAuthorize> {
   }
 }
 
-type TGetOAuth =
-  | PutEffect<accounts.IGetOAuthFailure>
-  | PutEffect<accounts.IGetOAuthSuccess>
-
-function* getOAuth(): IterableIterator<TGetOAuth> {
+function* getOAuth(): IterableIterator<Effect> {
   try {
+    const verifier = yield select<IRootState>(state => state.accounts.verifier)
+    const user = yield call(twitter.getAccessToken, verifier)
     yield put(accounts.getOAuthSuccess())
+    yield put(accounts.addAccount(user))
   } catch (e) {
     yield put(accounts.getOAuthFailure(e))
   }
