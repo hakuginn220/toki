@@ -1,9 +1,6 @@
 import { config } from 'dotenv'
-import path from 'path'
 
-declare var __static: string
-
-const { parsed } = config({ path: path.join(__static, '.env') })
+const { parsed } = config()
 
 export const TWITTER_CONSUMER_KEY = parsed ? parsed.TWITTER_CONSUMER_KEY : ''
 

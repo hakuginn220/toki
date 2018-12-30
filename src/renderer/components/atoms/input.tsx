@@ -18,8 +18,18 @@ export interface IProps {
 }
 
 const Style = styled.input`
+  display: inline-block;
+  padding: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  background: transparent;
   outline: none;
-  font-family: inherit;
+  line-height: 1;
+  appearance: none;
+  transition: all 0.2s;
+  &:focus {
+    border: 1px solid rgba(0, 0, 0, 0.4);
+  }
 `
 
 const Input: SFC<IProps> = ({ type = 'text', value = '', onChange }) => {

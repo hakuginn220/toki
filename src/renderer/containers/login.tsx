@@ -1,6 +1,5 @@
 import Login, { IProps } from '@/components/templates/login'
 import { changeVerifier, getAuthorize, getOAuth } from '@/modules/accounts'
-import { changeLocation } from '@/modules/routes'
 import { IRootState } from '@/store'
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux'
 import { RouteComponentProps } from 'react-router-dom'
@@ -29,8 +28,7 @@ const mapDispatchToProps: MapDispatchToProps<
   RouteComponentProps
 > = (dispatch, props) => ({
   onChangeVerifier(event) {
-    const verifier = event.target.value
-    dispatch(changeVerifier(verifier))
+    dispatch(changeVerifier(event.target.value))
   },
   onOAuth(event) {
     event.preventDefault()
@@ -40,9 +38,7 @@ const mapDispatchToProps: MapDispatchToProps<
     dispatch(getAuthorize())
   },
   onMoveHome() {
-    const location = '/'
-    dispatch(changeLocation(location))
-    props.history.push(location)
+    props.history.push('/')
   }
 })
 

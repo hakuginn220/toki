@@ -12,26 +12,17 @@ function createWindow() {
     width: 800
   })
 
-  let options
-
   if (process.env.NODE_ENV !== 'production') {
     mainWindow.webContents.openDevTools()
+  }
 
-    options = {
-      hostname: 'localhost',
-      port: process.env.ELECTRON_WEBPACK_WDS_PORT,
-      protocol: 'http',
-      slashes: true
-    }
-  } else {
-    options = {
+  mainWindow.loadURL(
+    url.format({
       pathname: path.resolve(app.getAppPath(), 'dist/index.html'),
       protocol: 'file',
       slashes: true
-    }
-  }
-
-  mainWindow.loadURL(url.format(options))
+    })
+  )
 
   mainWindow.on('closed', () => {
     mainWindow = null

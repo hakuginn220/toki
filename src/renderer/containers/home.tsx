@@ -1,9 +1,9 @@
 import Home, { IProps } from '@/components/templates/home'
-import { changeLocation } from '@/modules/routes'
 import { connect, MapDispatchToProps } from 'react-redux'
 import { RouteComponentProps } from 'react-router-dom'
 
 interface IDispatchProps {
+  onChangeAccount: IProps['onChangeAccount']
   onMoveLogin: IProps['onMoveLogin']
 }
 
@@ -11,10 +11,11 @@ const mapDispatchToProps: MapDispatchToProps<
   IDispatchProps,
   RouteComponentProps
 > = (dispatch, props) => ({
+  onChangeAccount(id) {
+    window.console.log(id)
+  },
   onMoveLogin() {
-    const location = '/login'
-    dispatch(changeLocation(location))
-    props.history.push(location)
+    props.history.push('/login')
   }
 })
 

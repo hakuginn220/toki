@@ -6,7 +6,9 @@ export interface IProps {
 }
 
 const Authorize: SFC<IProps> = ({ onAuthorize }) => (
-  <Button onClick={onAuthorize}>Login Account</Button>
+  <Button type="button" onClick={onAuthorize}>
+    Login Account
+  </Button>
 )
 
 export default Authorize
