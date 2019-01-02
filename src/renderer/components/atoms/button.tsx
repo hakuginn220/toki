@@ -2,7 +2,7 @@ import React, { MouseEvent, SFC } from 'react'
 import styled from 'styled-components'
 
 interface IProps {
-  type: 'button' | 'submit'
+  type?: 'button' | 'submit'
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void
 }
 
@@ -23,7 +23,7 @@ const ButtonStyle = styled.button`
   }
 `
 
-const Button: SFC<IProps> = ({ type, onClick, children }) => (
+const Button: SFC<IProps> = ({ type = 'button', onClick, children }) => (
   <ButtonStyle type={type} onClick={onClick}>
     {children}
   </ButtonStyle>

@@ -1,11 +1,13 @@
-import UserIcon from '@/components/molecules/user-icon'
+import CircleIconAdd from '@/components/atoms/circle-icon-add'
+import CircleImage from '@/components/atoms/circle-image'
 import { IUser } from '@/utils/types'
 import React, { SFC } from 'react'
 import styled from 'styled-components'
 
 interface IProps {
   users: IUser[]
-  onClick: (id: string) => void
+  onUserSelect: (id: string) => void
+  onUserAdd: () => void
 }
 
 const ListStyle = styled.ul`
@@ -13,7 +15,8 @@ const ListStyle = styled.ul`
   flex-direction: column;
   margin: 0;
   padding: 8px;
-  width: 64px;
+  height: calc(100% - 16px);
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
   list-style-type: none;
 `
 
@@ -22,15 +25,30 @@ const ItemStyle = styled.li`
   &:first-child {
     margin: 0;
   }
+  &:last-child {
+    margin-top: auto;
+  }
 `
 
-const UserList: SFC<IProps> = ({ users, onClick }) => (
+const UserList: SFC<IProps> = ({ users, onUserSelect, onUserAdd }) => (
   <ListStyle>
-    {users.map(user => (
-      <ItemStyle key={user.id}>
-        <UserIcon {...user} onClick={onClick} />
-      </ItemStyle>
-    ))}
+    {users.map(user => {
+      const handleClick = () => onUserSelect(user.id)
+
+      return (
+        <ItemStyle key={user.id}>
+          <CircleImage
+            src={user.profile_image_url}
+            alt={user.screen_name}
+            size={52}
+            onClick={handleClick}
+          />
+        </ItemStyle>
+      )
+    })}
+    <ItemStyle key="add">
+      <CircleIconAdd size={52} onClick={onUserAdd} />
+    </ItemStyle>
   </ListStyle>
 )
 

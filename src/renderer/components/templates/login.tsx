@@ -1,4 +1,3 @@
-import Button from '@/components/atoms/button'
 import Authorize from '@/components/organisms/authorize'
 import Navigation from '@/components/organisms/navigation'
 import OAuth from '@/components/organisms/oauth'
@@ -9,8 +8,8 @@ import styled from 'styled-components'
 export interface IProps {
   users: IUser[]
   verifier: string
-  onAddUser: () => void
-  onChangeUser: (id: string) => void
+  onUserSelect: (id: string) => void
+  onUserAdd: () => void
   onChangeVerifier?: (event: ChangeEvent<HTMLInputElement>) => void
   onOAuth: (event: FormEvent<HTMLFormElement>) => void
   onAuthorize: (event: MouseEvent<HTMLButtonElement>) => void
@@ -24,8 +23,8 @@ const Container = styled.div`
 const Login: SFC<IProps> = ({
   users,
   verifier,
-  onAddUser,
-  onChangeUser,
+  onUserSelect,
+  onUserAdd,
   onChangeVerifier,
   onOAuth,
   onAuthorize
@@ -33,8 +32,8 @@ const Login: SFC<IProps> = ({
   <Container>
     <Navigation
       users={users}
-      onAddUser={onAddUser}
-      onChangeUser={onChangeUser}
+      onUserSelect={onUserSelect}
+      onUserAdd={onUserAdd}
     />
     <div>
       <Authorize onAuthorize={onAuthorize} />

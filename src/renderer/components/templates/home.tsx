@@ -5,8 +5,8 @@ import styled from 'styled-components'
 
 export interface IProps {
   users: IUser[]
-  onAddUser: () => void
-  onChangeUser: (id: string) => void
+  onUserSelect: (id: string) => void
+  onUserAdd: () => void
 }
 
 const Container = styled.div`
@@ -14,12 +14,12 @@ const Container = styled.div`
   height: 100%;
 `
 
-const Home: SFC<IProps> = ({ users, onAddUser, onChangeUser }) => (
+const Home: SFC<IProps> = ({ users, onUserSelect, onUserAdd }) => (
   <Container>
     <Navigation
       users={users}
-      onAddUser={onAddUser}
-      onChangeUser={onChangeUser}
+      onUserSelect={onUserSelect}
+      onUserAdd={onUserAdd}
     />
     <div />
   </Container>

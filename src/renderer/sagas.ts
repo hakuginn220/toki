@@ -32,8 +32,6 @@ function* getOAuth(): IterableIterator<Effect> {
       'account/verify_credentials'
     )
 
-    window.console.log(user)
-
     yield put(accounts.getOAuthSuccess())
     yield put(
       accounts.addAccount({

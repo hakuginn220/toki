@@ -2,6 +2,7 @@ import React, { SFC } from 'react'
 import styled from 'styled-components'
 
 interface IProps {
+  align?: 'stretch' | 'flex-start' | 'flex-end' | 'center' | 'baseline'
   direction?: 'row' | 'row-reverse' | 'column' | 'column-reverse'
   justify?:
     | 'flex-start'
@@ -9,7 +10,6 @@ interface IProps {
     | 'center'
     | 'space-between'
     | 'space-around'
-  align?: 'stretch' | 'flex-start' | 'flex-end' | 'center' | 'baseline'
 }
 
 const FlexStyle = styled.div`

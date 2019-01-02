@@ -16,20 +16,23 @@ const mapStateToProps: MapStateToProps<
 })
 
 interface IDispatchProps {
-  onAddUser: IProps['onAddUser']
-  onChangeUser: IProps['onChangeUser']
+  onUserSelect: IProps['onUserSelect']
+  onUserAdd: IProps['onUserAdd']
 }
 
 const mapDispatchToProps: MapDispatchToProps<
   IDispatchProps,
   RouteComponentProps
 > = (dispatch, props) => ({
-  onAddUser() {
-    props.history.push('/login')
-  },
-  onChangeUser(id) {
+  onUserSelect(id) {
     window.console.log(id)
-    props.history.push('/')
+
+    if (props.location.pathname !== '/') {
+      props.history.push('/')
+    }
+  },
+  onUserAdd() {
+    props.history.push('/login')
   }
 })
 
