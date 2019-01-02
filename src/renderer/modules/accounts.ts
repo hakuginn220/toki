@@ -1,4 +1,4 @@
-import { ITwitterAccessToken } from '@/utils/twitter'
+import { IUser } from '@/utils/types'
 import produce from 'immer'
 import { Action, Reducer } from 'redux'
 
@@ -37,7 +37,7 @@ export interface IGetOAuthFailure
 }
 
 export interface IAddAccount extends Action<ActionTypes.ADD_ACCOUNT> {
-  payload: { user: ITwitterAccessToken }
+  payload: { user: IUser }
 }
 
 export interface IRemoveAccount extends Action<ActionTypes.REMOVE_ACCOUNT> {
@@ -83,7 +83,7 @@ export function getOAuthFailure(payload: Error): IGetOAuthFailure {
   return { error: true, payload, type: ActionTypes.GET_OAUTH_FAILURE }
 }
 
-export function addAccount(user: ITwitterAccessToken): IAddAccount {
+export function addAccount(user: IUser): IAddAccount {
   return { payload: { user }, type: ActionTypes.ADD_ACCOUNT }
 }
 
@@ -96,7 +96,7 @@ export function changeVerifier(verifier: string): IChangeVerifier {
 }
 
 export interface IState {
-  users: ITwitterAccessToken[]
+  users: IUser[]
   verifier: string
 }
 
@@ -108,13 +108,9 @@ export const initialState: IState = {
 const reducer: Reducer<IState, TActions> = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case ActionTypes.GET_AUTHORIZE_SUCCESS:
-      case ActionTypes.GET_OAUTH_SUCCESS:
-        draft.verifier = ''
-        break
-
       case ActionTypes.ADD_ACCOUNT:
         draft.users.push(action.payload.user)
+        draft.verifier = ''
         break
 
       case ActionTypes.REMOVE_ACCOUNT:

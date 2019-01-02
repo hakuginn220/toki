@@ -1,11 +1,12 @@
-import Button from '@/components/atoms/button'
 import Navigation from '@/components/organisms/navigation'
-import React, { MouseEvent, SFC } from 'react'
+import { IUser } from '@/utils/types'
+import React, { SFC } from 'react'
 import styled from 'styled-components'
 
 export interface IProps {
-  onChangeAccount: (id: string) => void
-  onMoveLogin?: (event: MouseEvent<HTMLButtonElement>) => void
+  users: IUser[]
+  onAddUser: () => void
+  onChangeUser: (id: string) => void
 }
 
 const Container = styled.div`
@@ -13,21 +14,14 @@ const Container = styled.div`
   height: 100%;
 `
 
-const Home: SFC<IProps> = ({ onMoveLogin, onChangeAccount }) => (
+const Home: SFC<IProps> = ({ users, onAddUser, onChangeUser }) => (
   <Container>
     <Navigation
-      accounts={[
-        { id: '1', name: 'test1', icon: 'https://placehold.jp/150x150.png' },
-        { id: '2', name: 'test2', icon: 'https://placehold.jp/150x150.png' },
-        { id: '3', name: 'test3', icon: 'https://placehold.jp/150x150.png' }
-      ]}
-      onChangeAccount={onChangeAccount}
+      users={users}
+      onAddUser={onAddUser}
+      onChangeUser={onChangeUser}
     />
-    <div>
-      <Button type="button" onClick={onMoveLogin}>
-        Go Login
-      </Button>
-    </div>
+    <div />
   </Container>
 )
 

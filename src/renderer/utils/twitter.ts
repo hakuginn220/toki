@@ -1,11 +1,7 @@
 import { TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET } from '@/utils/dotenv'
+import { ITwitterAccessToken } from '@/utils/types'
 import { OAuth } from 'oauth'
 import url from 'url'
-
-export interface ITwitterAccessToken {
-  access_token: string
-  access_token_secret: string
-}
 
 const hostname = 'api.twitter.com'
 const version = '1.1'
@@ -80,7 +76,7 @@ export default {
   get(
     twitter: ITwitterAccessToken,
     resource: string,
-    query: object
+    query: object = {}
   ): Promise<any> {
     return new Promise((resolve, reject) => {
       const endpoint = url.format({
@@ -99,7 +95,7 @@ export default {
             return reject(err)
           }
 
-          resolve(data)
+          resolve(typeof data === 'string' ? JSON.parse(data) : data)
         }
       )
     })
@@ -108,7 +104,7 @@ export default {
   post(
     twitter: ITwitterAccessToken,
     resource: string,
-    body: object
+    body: object = {}
   ): Promise<any> {
     return new Promise((resolve, reject) => {
       const endpoint = url.format({
@@ -128,7 +124,7 @@ export default {
             return reject(err)
           }
 
-          resolve(data)
+          resolve(typeof data === 'string' ? JSON.parse(data) : data)
         }
       )
     })
@@ -157,7 +153,7 @@ export default {
             return reject(err)
           }
 
-          resolve(data)
+          resolve(typeof data === 'string' ? JSON.parse(data) : data)
         }
       )
     })
@@ -180,7 +176,7 @@ export default {
             return reject(err)
           }
 
-          resolve(data)
+          resolve(typeof data === 'string' ? JSON.parse(data) : data)
         }
       )
     })

@@ -1,5 +1,4 @@
 import accounts, { IState as IStateAccounts } from '@/modules/accounts'
-import routes, { IState as IStateRoutes } from '@/modules/routes'
 import rootSaga from '@/sagas'
 import { applyMiddleware, combineReducers, createStore, Reducer } from 'redux'
 import logger from 'redux-logger'
@@ -9,12 +8,11 @@ import createSaga from 'redux-saga'
 
 export interface IRootState {
   accounts: IStateAccounts
-  routes: IStateRoutes
 }
 
 const config = { key: 'toki', storage }
 
-const reducer: Reducer<IRootState> = combineReducers({ accounts, routes })
+const reducer: Reducer<IRootState> = combineReducers({ accounts })
 
 const rootReducer = persistReducer(config, reducer)
 

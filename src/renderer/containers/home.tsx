@@ -1,25 +1,39 @@
 import Home, { IProps } from '@/components/templates/home'
-import { connect, MapDispatchToProps } from 'react-redux'
+import { IRootState } from '@/store'
+import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux'
 import { RouteComponentProps } from 'react-router-dom'
 
+interface IStateProps {
+  users: IProps['users']
+}
+
+const mapStateToProps: MapStateToProps<
+  IStateProps,
+  RouteComponentProps,
+  IRootState
+> = state => ({
+  users: state.accounts.users
+})
+
 interface IDispatchProps {
-  onChangeAccount: IProps['onChangeAccount']
-  onMoveLogin: IProps['onMoveLogin']
+  onAddUser: IProps['onAddUser']
+  onChangeUser: IProps['onChangeUser']
 }
 
 const mapDispatchToProps: MapDispatchToProps<
   IDispatchProps,
   RouteComponentProps
 > = (dispatch, props) => ({
-  onChangeAccount(id) {
-    window.console.log(id)
-  },
-  onMoveLogin() {
+  onAddUser() {
     props.history.push('/login')
+  },
+  onChangeUser(id) {
+    window.console.log(id)
+    props.history.push('/')
   }
 })
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Home)

@@ -7,7 +7,11 @@ const createUser = () => {
 
   return {
     access_token: `token code for No.${count}`,
-    access_token_secret: `secret code for No.${count}`
+    access_token_secret: `secret code for No.${count}`,
+    id: count.toString(),
+    name: 'name',
+    profile_image_url: 'image url',
+    screen_name: 'screen name'
   }
 }
 
