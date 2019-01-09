@@ -1,15 +1,21 @@
 const path = require('path')
-const { CheckerPlugin } = require('awesome-typescript-loader')
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const common = {
   output: { path: path.resolve(__dirname, 'dist'), filename: '[name].js' },
   module: {
-    rules: [{ test: /\.tsx?$/, loader: 'awesome-typescript-loader' }]
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: [{ loader: 'ts-loader', options: { transpileOnly: true } }]
+      }
+    ]
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json'],
-    alias: { '@': path.resolve(__dirname, 'src/renderer') }
+    alias: { '@': path.resolve(__dirname, 'src/renderer') },
+    plugins: [new TsconfigPathsPlugin()]
   }
 }
 
@@ -18,18 +24,14 @@ const renderer = {
   name: 'renderer',
   target: 'electron-renderer',
   entry: { renderer: './src/renderer/main.tsx' },
-  plugins: [
-    new CheckerPlugin(),
-    new HtmlWebpackPlugin({ template: './static/index.html' })
-  ]
+  plugins: [new HtmlWebpackPlugin({ template: './static/index.html' })]
 }
 
 const main = {
   ...common,
   name: 'main',
   entry: { main: ['./src/main/main.ts'] },
-  target: 'electron-main',
-  plugins: [new CheckerPlugin()]
+  target: 'electron-main'
 }
 
 module.exports = [renderer, main]

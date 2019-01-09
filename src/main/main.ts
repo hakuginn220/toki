@@ -12,10 +12,6 @@ function createWindow() {
     width: 800
   })
 
-  if (process.env.NODE_ENV !== 'production') {
-    mainWindow.webContents.openDevTools()
-  }
-
   mainWindow.loadURL(
     url.format({
       pathname: path.resolve(app.getAppPath(), 'dist/index.html'),
@@ -27,6 +23,10 @@ function createWindow() {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
+
+  if (process.env.NODE_ENV !== 'production') {
+    mainWindow.webContents.openDevTools()
+  }
 }
 
 const gotTheLock = app.requestSingleInstanceLock()

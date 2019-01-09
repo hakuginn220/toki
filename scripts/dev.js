@@ -7,7 +7,7 @@ const renderer = webpack({ ...renderer_config, mode: 'development' })
 const main = webpack({ ...main_config, mode: 'development' })
 const options = { aggregateTimeout: 300, poll: true }
 
-electron.start()
+let is_first = true
 
 renderer.watch(options, (err, stats) => {
   console.log(stats.toString({ colors: true }))
@@ -15,5 +15,12 @@ renderer.watch(options, (err, stats) => {
 
 main.watch(options, (err, stats) => {
   console.log(stats.toString({ colors: true }))
-  electron.restart()
+  if (is_first) {
+    electron.start()
+    is_first = false
+  } else {
+    electron.restart()
+  }
+
+  console.log(stats.toString({ colors: true }))
 })
