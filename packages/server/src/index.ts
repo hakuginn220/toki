@@ -2,6 +2,7 @@ import 'source-map-support/register'
 import express, { ErrorRequestHandler } from 'express'
 import helmet from 'helmet'
 import compression from 'compression'
+import bodyParser from 'body-parser'
 import routes from './routes'
 
 const app = express()
@@ -10,6 +11,7 @@ app.enable('trust proxy')
 
 app.use(helmet())
 app.use(compression())
+app.use(bodyParser.json())
 
 app.use('/', routes)
 

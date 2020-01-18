@@ -3,17 +3,17 @@ import * as twitter from '../models/twitter'
 
 const router = Router()
 
-router.post('/twitter/authorize', (req, res, next) => {
+router.post('/twitter', (req, res, next) => {
   twitter
     .getAuthorizeUrl()
-    .then(url => res.send({ url }))
+    .then(data => res.send(data))
     .catch(next)
 })
 
 router.post('/twitter/callback', (req, res, next) => {
   twitter
-    .getAccessToken(req.body.verifier)
-    .then(token => res.send({ token }))
+    .getAccessToken(req.body.code, req.body.token, req.body.secret)
+    .then(data => res.send(data))
     .catch(next)
 })
 

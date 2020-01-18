@@ -29,16 +29,11 @@ module.exports = {
     compress: true,
     historyApiFallback: true,
     hot: true,
-    https: true,
+    https: false,
     port: 10000,
     open: true,
     overlay: true,
     quiet: true,
-    proxy: [
-      {
-        context: ['/auth', '/api'],
-        target: 'http://localhost:10001'
-      }
-    ]
+    proxy: [{ context: ['/auth'], target: 'http://localhost:10001' }]
   }
 }

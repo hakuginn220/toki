@@ -4,9 +4,6 @@ import { OAuth } from 'oauth'
 
 const { parsed } = config()
 
-let token: string = ''
-let secret: string = ''
-
 const client = new OAuth(
   `https://api.twitter.com/oauth/request_token`,
   `https://api.twitter.com/oauth/access_token`,
@@ -17,13 +14,14 @@ const client = new OAuth(
   'HMAC-SHA1'
 )
 
-export function getAuthorizeUrl(): Promise<string> {
+export function getAuthorizeUrl(): Promise<{
+  endpoint: string
+  token: string
+  secret: string
+}> {
   return new Promise((resolve, reject) => {
-    client.getOAuthRequestToken((err, oauthToken, oauthTokenSecret) => {
+    client.getOAuthRequestToken((err, token, secret) => {
       if (err) return reject(err)
-
-      token = oauthToken
-      secret = oauthTokenSecret
 
       const endpoint = url.format({
         hostname: 'api.twitter.com',
@@ -32,29 +30,28 @@ export function getAuthorizeUrl(): Promise<string> {
         query: { oauth_token: token }
       })
 
-      resolve(endpoint)
+      resolve({ endpoint, token, secret })
     })
   })
 }
 
 export function getAccessToken(
-  verifier: string
+  code: string,
+  token: string,
+  secret: string
 ): Promise<{
-  accessToken: string
-  accessTokenSecret: string
+  access_token: string
+  access_token_secret: string
 }> {
   return new Promise((resolve, reject) => {
     client.getOAuthAccessToken(
       token,
       secret,
-      verifier,
-      (err, accessToken, accessTokenSecret) => {
+      code,
+      (err, access_token, access_token_secret) => {
         if (err) return reject(err)
 
-        token = ''
-        secret = ''
-
-        resolve({ accessToken, accessTokenSecret })
+        resolve({ access_token, access_token_secret })
       }
     )
   })
