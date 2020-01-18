@@ -20,6 +20,6 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
 
 app.use(errorHandler)
 
-app.listen(8081, () => {
-  console.log('app listening on port 8081!')
+app.listen(10001, () => {
+  console.log('app listening on port 10001!')
 })

@@ -1,18 +1,20 @@
 import { Router } from 'express'
-import * as twitter from '../utils/twitter'
+import * as twitter from '../models/twitter'
 
 const router = Router()
 
-router.post('/twitter/authorize', async (req, res) => {
-  const url = await twitter.getAuthorizeUrl()
-
-  res.send({ url })
+router.post('/twitter/authorize', (req, res, next) => {
+  twitter
+    .getAuthorizeUrl()
+    .then(url => res.send({ url }))
+    .catch(next)
 })
 
-router.post('/twitter/callback', async (req, res, next) => {
-  const token = await twitter.getAccessToken(req.body.verifier)
-
-  res.send({ token })
+router.post('/twitter/callback', (req, res, next) => {
+  twitter
+    .getAccessToken(req.body.verifier)
+    .then(token => res.send({ token }))
+    .catch(next)
 })
 
 export default router

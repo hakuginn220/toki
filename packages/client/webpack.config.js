@@ -22,9 +22,7 @@ module.exports = {
   plugins: [
     new HotModuleReplacementPlugin(),
     new FriendlyErrorsWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      template: 'index.html'
-    })
+    new HtmlWebpackPlugin({ template: 'index.html' })
   ],
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
@@ -32,13 +30,14 @@ module.exports = {
     historyApiFallback: true,
     hot: true,
     https: true,
+    port: 10000,
     open: true,
     overlay: true,
     quiet: true,
     proxy: [
       {
         context: ['/auth', '/api'],
-        target: 'http://localhost:8081'
+        target: 'http://localhost:10001'
       }
     ]
   }
