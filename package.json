@@ -19,8 +19,8 @@
   },
   "scripts": {
     "start": "lerna run start --stream",
-    "lint": "lerna run lint --stream",
-    "fmt": "lerna run fmt --stream"
+    "lint": "eslint --fix \"packages/**/*.{ts,tsx}\"",
+    "fmt": "prettier --write \"**/*.{js,ts,tsx,md,json,html,css}\""
   },
   "husky": {
     "hooks": {

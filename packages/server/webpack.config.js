@@ -12,10 +12,7 @@ module.exports = {
     publicPath: '/'
   },
   module: {
-    rules: [
-      { test: /\.tsx?$/, loader: 'eslint-loader', enforce: 'pre' },
-      { test: /\.tsx?$/, loader: 'babel-loader' }
-    ]
+    rules: [{ test: /\.tsx?$/, loader: 'babel-loader' }]
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json']
