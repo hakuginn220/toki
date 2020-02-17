@@ -14,12 +14,13 @@
     "husky": "^4.2.3",
     "lerna": "^3.20.2",
     "lint-staged": "^10.0.7",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "typescript": "^3.7.5"
   },
   "scripts": {
     "start": "lerna run start --stream",
-    "lint": "eslint --fix \"packages/**/*.{js,ts,tsx}\"",
-    "fmt": "prettier --write \"**/*.{html,css,js,json,md,ts,tsx}\""
+    "lint": "lerna run lint --stream",
+    "fmt": "lerna run fmt --stream"
   },
   "husky": {
     "hooks": {
@@ -27,11 +28,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{html,css,json,md}": [
+    "*.{js,ts,tsx,md,json,html,css}": [
       "prettier --write"
     ]
   }

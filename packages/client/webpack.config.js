@@ -6,12 +6,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
   target: 'web',
   entry: './src/index.tsx',
+  devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
   },
   module: {
-    rules: [{ test: /\.tsx?$/, loader: 'babel-loader' }]
+    rules: [
+      { test: /\.tsx?$/, loader: 'eslint-loader', enforce: 'pre' },
+      { test: /\.tsx?$/, loader: 'babel-loader' }
+    ]
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json'],

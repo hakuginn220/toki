@@ -6,12 +6,16 @@ const nodeExternals = require('webpack-node-externals')
 module.exports = {
   target: 'node',
   entry: './src/index.ts',
+  devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
   },
   module: {
-    rules: [{ test: /\.tsx?$/, loader: 'babel-loader' }]
+    rules: [
+      { test: /\.tsx?$/, loader: 'eslint-loader', enforce: 'pre' },
+      { test: /\.tsx?$/, loader: 'babel-loader' }
+    ]
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json']
