@@ -6,11 +6,11 @@ const Login: FC = () => {
   const [token, setToken] = useState('')
   const [secret, setSecret] = useState('')
 
-  function changeCode(event: ChangeEvent<HTMLInputElement>) {
+  function changeCode(event: ChangeEvent<HTMLInputElement>): void {
     setCode(event.target.value)
   }
 
-  function openAuthTwitter() {
+  function openAuthTwitter(): void {
     setCode('')
 
     auth.post('twitter').then(response => {
@@ -20,7 +20,7 @@ const Login: FC = () => {
     })
   }
 
-  function getAccessToken(e: FormEvent<HTMLFormElement>) {
+  function getAccessToken(e: FormEvent<HTMLFormElement>): void {
     e.preventDefault()
 
     const data = { code, token, secret }

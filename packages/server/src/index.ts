@@ -17,6 +17,7 @@ app.use(morgan('dev'))
 
 app.use('/', routes)
 
+// eslint-disable-next-line
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   console.error(err)
   res.sendStatus(500)

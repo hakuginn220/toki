@@ -11,8 +11,8 @@ const initialState: State = {
 const INCREMENT = 'INCREMENT'
 const DECREMENT = 'DECREMENT'
 
-export const increment = () => ({ type: INCREMENT })
-export const decrement = () => ({ type: DECREMENT })
+export const increment = (): { type: 'INCREMENT' } => ({ type: INCREMENT })
+export const decrement = (): { type: 'DECREMENT' } => ({ type: DECREMENT })
 
 const reducer: Reducer<State> = (state = initialState, action) => {
   switch (action.type) {

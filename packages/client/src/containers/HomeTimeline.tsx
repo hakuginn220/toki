@@ -13,8 +13,8 @@ const HomeTimeline: FC = () => {
 
   return (
     <div>
-      {timeline.map(tweet => (
-        <div>{JSON.stringify(tweet)}</div>
+      {timeline.map((tweet, index) => (
+        <div key={index}>{JSON.stringify(tweet)}</div>
       ))}
     </div>
   )

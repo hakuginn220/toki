@@ -7,8 +7,13 @@ const Home: FC = () => {
   const count = useSelector<State>(state => state.count)
   const dispatch = useDispatch()
 
-  const inc = () => dispatch(increment())
-  const dec = () => dispatch(decrement())
+  const inc = (): void => {
+    dispatch(increment())
+  }
+
+  const dec = (): void => {
+    dispatch(decrement())
+  }
 
   return (
     <>

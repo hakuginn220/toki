@@ -1,4 +1,3 @@
-import url from 'url'
 import { config } from 'dotenv'
 import { OAuth } from 'oauth'
 
@@ -23,12 +22,7 @@ export function getAuthorizeUrl(): Promise<{
     client.getOAuthRequestToken((err, token, secret) => {
       if (err) return reject(err)
 
-      const endpoint = url.format({
-        hostname: 'api.twitter.com',
-        pathname: 'oauth/authorize',
-        protocol: 'https',
-        query: { oauth_token: token }
-      })
+      const endpoint = `https://api.twitter.com/oauth/authorize?oauth_token=${token}`
 
       resolve({ endpoint, token, secret })
     })
@@ -40,18 +34,18 @@ export function getAccessToken(
   token: string,
   secret: string
 ): Promise<{
-  access_token: string
-  access_token_secret: string
+  accessToken: string
+  accessTokenSecret: string
 }> {
   return new Promise((resolve, reject) => {
     client.getOAuthAccessToken(
       token,
       secret,
       code,
-      (err, access_token, access_token_secret) => {
+      (err, accessToken, accessTokenSecret) => {
         if (err) return reject(err)
 
-        resolve({ access_token, access_token_secret })
+        resolve({ accessToken, accessTokenSecret })
       }
     )
   })
