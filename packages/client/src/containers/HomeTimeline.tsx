@@ -1,7 +1,7 @@
 import React, { useState, useEffect, FC } from 'react'
 import { twitter } from '../utils/api'
 
-const HomeTimeline: FC = () => {
+export const HomeTimeline: FC = () => {
   const [timeline, setTimeline] = useState([])
 
   useEffect(() => {
@@ -19,5 +19,3 @@ const HomeTimeline: FC = () => {
     </div>
   )
 }
-
-export default HomeTimeline

@@ -6,7 +6,7 @@ type Props = {
   profileImageUrl: string
 }
 
-const Tweet: FC<Props> = props => {
+export const Tweet: FC<Props> = props => {
   return (
     <div>
       <img src={props.profileImageUrl} />
@@ -15,5 +15,3 @@ const Tweet: FC<Props> = props => {
     </div>
   )
 }
-
-export default Tweet

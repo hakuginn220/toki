@@ -1,7 +1,7 @@
 import React, { useState, FC, ChangeEvent, FormEvent } from 'react'
 import { auth } from '../utils/api'
 
-const Login: FC = () => {
+export const Login: FC = () => {
   const [code, setCode] = useState('')
   const [token, setToken] = useState('')
   const [secret, setSecret] = useState('')
@@ -47,5 +47,3 @@ const Login: FC = () => {
     </>
   )
 }
-
-export default Login

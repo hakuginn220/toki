@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import HomeTimeline from '../containers/HomeTimeline'
+import { HomeTimeline } from '../containers/HomeTimeline'
 import { State, increment, decrement } from '../store'
 
-const Home: FC = () => {
+export const Home: FC = () => {
   const count = useSelector<State>(state => state.count)
   const dispatch = useDispatch()
 
@@ -24,5 +24,3 @@ const Home: FC = () => {
     </>
   )
 }
-
-export default Home

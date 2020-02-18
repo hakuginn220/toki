@@ -6,7 +6,7 @@ type Props = {
   profileImageUrl: string
 }
 
-const Account: FC<Props> = props => {
+export const Account: FC<Props> = props => {
   return (
     <div>
       <img src={props.profileImageUrl} />
@@ -15,5 +15,3 @@ const Account: FC<Props> = props => {
     </div>
   )
 }
-
-export default Account
