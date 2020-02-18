@@ -7,6 +7,7 @@ module.exports = {
   target: 'web',
   entry: './src/index.tsx',
   devtool: 'source-map',
+  stats: 'minimal',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
@@ -30,7 +31,7 @@ module.exports = {
     compress: true,
     historyApiFallback: true,
     hot: true,
-    https: false,
+    https: true,
     port: 10000,
     open: true,
     overlay: true,

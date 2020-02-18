@@ -7,6 +7,7 @@ module.exports = {
   target: 'node',
   entry: './src/index.ts',
   devtool: 'source-map',
+  stats: 'minimal',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
