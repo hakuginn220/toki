@@ -28,7 +28,7 @@
     "@types/oauth": "^0.9.1",
     "babel-loader": "^8.0.6",
     "friendly-errors-webpack-plugin": "^1.7.0",
-    "nodemon-webpack-plugin": "^4.2.2",
+    "nodemon-webpack-plugin": "^4.3.1",
     "typescript": "^3.7.5",
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11",

@@ -1,7 +1,4 @@
 {
-  "parserOptions": {
-    "project": "./packages/client/tsconfig.json"
-  },
   "env": {
     "browser": true
   },
