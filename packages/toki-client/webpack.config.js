@@ -16,10 +16,7 @@ module.exports = {
     rules: [{ test: /\.tsx?$/, loader: 'babel-loader' }]
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.json'],
-    alias: {
-      'react-dom': '@hot-loader/react-dom'
-    }
+    extensions: ['.ts', '.tsx', '.js', '.json']
   },
   plugins: [
     new HotModuleReplacementPlugin(),
